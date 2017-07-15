@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="developModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="developEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="sp_WebAppIntranetConsultaAnuncios" ReturnType="Collection(developModel.sp_WebAppIntranetConsultaAnuncios_Result)" />
+    <EntitySet Name="Intranet_Anuncios" EntityType="developModel.Intranet_Anuncios" />
+    <EntitySet Name="Intranet_noticias" EntityType="developModel.Intranet_noticias" />
+    <FunctionImport Name="sp_WebAppIntranetConsultaEventos" ReturnType="Collection(developModel.sp_WebAppIntranetConsultaEventos_Result)">
+      <Parameter Name="fecha_consulta" Mode="In" Type="DateTime" />
+      <Parameter Name="tipo" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="sp_WebAppIntranetConsultaAnuncios_Result">
+    <Property Type="Int32" Name="num_fol" Nullable="false" />
+    <Property Type="String" Name="titulo" Nullable="false" MaxLength="120" />
+    <Property Type="DateTime" Name="fecha" Nullable="false" Precision="23" />
+    <Property Type="String" Name="autor" Nullable="false" MaxLength="3" />
+  </ComplexType>
+  <EntityType Name="Intranet_Anuncios">
+    <Key>
+      <PropertyRef Name="num_fol" />
+    </Key>
+    <Property Name="num_fol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="titulo" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="true" />
+    <Property Name="texto" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="autor" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="fecha_fin" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Intranet_noticias">
+    <Key>
+      <PropertyRef Name="num_folio" />
+    </Key>
+    <Property Name="num_folio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="titulo" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="noticia" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="resumen" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="imagenUrl" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+    <Property Name="autor" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <ComplexType Name="sp_WebAppIntranetConsultaEventos_Result">
+    <Property Type="Int32" Name="num_fol" Nullable="false" />
+    <Property Type="String" Name="nombre" Nullable="false" MaxLength="120" />
+    <Property Type="DateTime" Name="fecha_ini" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="fecha_fin" Nullable="false" Precision="23" />
+    <Property Type="String" Name="autor" Nullable="false" MaxLength="3" />
+  </ComplexType>
+</Schema>

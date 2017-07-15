@@ -1,0 +1,10 @@
+C:\Projects\WebAppIntranetSkytex\Entidades\bin\Debug\Entidades.dll.config
+C:\Projects\WebAppIntranetSkytex\Entidades\bin\Debug\Entidades.dll
+C:\Projects\WebAppIntranetSkytex\Entidades\bin\Debug\Entidades.pdb
+C:\Projects\WebAppIntranetSkytex\Entidades\bin\Debug\EntityFramework.dll
+C:\Projects\WebAppIntranetSkytex\Entidades\bin\Debug\EntityFramework.SqlServer.dll
+C:\Projects\WebAppIntranetSkytex\Entidades\bin\Debug\EntityFramework.xml
+C:\Projects\WebAppIntranetSkytex\Entidades\bin\Debug\EntityFramework.SqlServer.xml
+C:\Projects\WebAppIntranetSkytex\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache
+C:\Projects\WebAppIntranetSkytex\Entidades\obj\Debug\Entidades.dll
+C:\Projects\WebAppIntranetSkytex\Entidades\obj\Debug\Entidades.pdb

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="developModelStoreContainer" CdmEntityContainer="developEntities">
+    <FunctionImportMapping FunctionImportName="sp_WebAppIntranetConsultaAnuncios" FunctionName="developModel.Store.sp_WebAppIntranetConsultaAnuncios">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="developModel.sp_WebAppIntranetConsultaAnuncios_Result">
+          <ScalarProperty Name="num_fol" ColumnName="num_fol" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="autor" ColumnName="autor" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Intranet_Anuncios">
+      <EntityTypeMapping TypeName="developModel.Intranet_Anuncios">
+        <MappingFragment StoreEntitySet="Intranet_Anuncios">
+          <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+          <ScalarProperty Name="autor" ColumnName="autor" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="texto" ColumnName="texto" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="num_fol" ColumnName="num_fol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Intranet_noticias">
+      <EntityTypeMapping TypeName="developModel.Intranet_noticias">
+        <MappingFragment StoreEntitySet="Intranet_noticias">
+          <ScalarProperty Name="autor" ColumnName="autor" />
+          <ScalarProperty Name="imagenUrl" ColumnName="imagenUrl" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="resumen" ColumnName="resumen" />
+          <ScalarProperty Name="noticia" ColumnName="noticia" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="num_folio" ColumnName="num_folio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_WebAppIntranetConsultaEventos" FunctionName="developModel.Store.sp_WebAppIntranetConsultaEventos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="developModel.sp_WebAppIntranetConsultaEventos_Result">
+          <ScalarProperty Name="num_fol" ColumnName="num_fol" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="fecha_ini" ColumnName="fecha_ini" />
+          <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+          <ScalarProperty Name="autor" ColumnName="autor" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>
