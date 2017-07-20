@@ -8,6 +8,14 @@
       <Parameter Name="fecha_consulta" Mode="In" Type="DateTime" />
       <Parameter Name="tipo" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="sp_WebAppIntranetInsertaNoticia" ReturnType="Collection(developModel.sp_WebAppIntranetInsertaNoticia_Result)">
+      <Parameter Name="titulo" Mode="In" Type="String" />
+      <Parameter Name="noticia" Mode="In" Type="String" />
+      <Parameter Name="resumen" Mode="In" Type="String" />
+      <Parameter Name="fecha" Mode="In" Type="DateTime" />
+      <Parameter Name="imagenUrl" Mode="In" Type="String" />
+      <Parameter Name="autor" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="sp_WebAppIntranetConsultaAnuncios_Result">
     <Property Type="Int32" Name="num_fol" Nullable="false" />
@@ -44,5 +52,9 @@
     <Property Type="DateTime" Name="fecha_ini" Nullable="false" Precision="23" />
     <Property Type="DateTime" Name="fecha_fin" Nullable="false" Precision="23" />
     <Property Type="String" Name="autor" Nullable="false" MaxLength="3" />
+  </ComplexType>
+  <ComplexType Name="sp_WebAppIntranetInsertaNoticia_Result">
+    <Property Type="Int16" Name="error" Nullable="true" />
+    <Property Type="String" Name="mensaje" Nullable="true" MaxLength="25" />
   </ComplexType>
 </Schema>

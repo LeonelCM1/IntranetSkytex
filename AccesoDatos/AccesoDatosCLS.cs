@@ -35,5 +35,19 @@ namespace AccesoDatos
             SqlConnection.ClearAllPools();
             return eventos;
         }
+        public sp_WebAppIntranetInsertaNoticia_Result InsertarNoticia(string titulo, string noticia, string resumen, DateTime fecha, string imagen, string autor)
+        {
+            sp_WebAppIntranetInsertaNoticia_Result resultado = contexto.sp_WebAppIntranetInsertaNoticia(titulo, noticia, resumen, fecha, imagen, autor).FirstOrDefault();
+            SqlConnection.ClearAllPools();
+            return resultado;
+        }
+        public Intranet_noticias ConsultaNoticiaPorFolio(int folio)
+        {
+            Intranet_noticias Noticia = (from u in contexto.Intranet_noticias 
+                                          where u.num_folio == folio
+                                          select u).FirstOrDefault();
+            SqlConnection.ClearAllPools();
+            return Noticia;
+        }
     }
 }

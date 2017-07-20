@@ -47,5 +47,34 @@ namespace Entidades
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_WebAppIntranetConsultaEventos_Result>("sp_WebAppIntranetConsultaEventos", fecha_consultaParameter, tipoParameter);
         }
+    
+        public virtual ObjectResult<sp_WebAppIntranetInsertaNoticia_Result> sp_WebAppIntranetInsertaNoticia(string titulo, string noticia, string resumen, Nullable<System.DateTime> fecha, string imagenUrl, string autor)
+        {
+            var tituloParameter = titulo != null ?
+                new ObjectParameter("titulo", titulo) :
+                new ObjectParameter("titulo", typeof(string));
+    
+            var noticiaParameter = noticia != null ?
+                new ObjectParameter("noticia", noticia) :
+                new ObjectParameter("noticia", typeof(string));
+    
+            var resumenParameter = resumen != null ?
+                new ObjectParameter("resumen", resumen) :
+                new ObjectParameter("resumen", typeof(string));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            var imagenUrlParameter = imagenUrl != null ?
+                new ObjectParameter("imagenUrl", imagenUrl) :
+                new ObjectParameter("imagenUrl", typeof(string));
+    
+            var autorParameter = autor != null ?
+                new ObjectParameter("autor", autor) :
+                new ObjectParameter("autor", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_WebAppIntranetInsertaNoticia_Result>("sp_WebAppIntranetInsertaNoticia", tituloParameter, noticiaParameter, resumenParameter, fechaParameter, imagenUrlParameter, autorParameter);
+        }
     }
 }

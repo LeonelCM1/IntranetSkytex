@@ -48,14 +48,17 @@ namespace WebAppIntranetSkytex
             }
             return size;
         }
-        public string miniatura(string url)
+        public string miniatura(object url)
         {
             string nuevaurl = "";
-            System.Drawing.Image img = System.Drawing.Image.FromFile(Server.MapPath("~/Media/"+url));
-            System.Drawing.Image thumb = img.GetThumbnailImage(200, 160, null, IntPtr.Zero);
-            img.Dispose();
-            thumb.Save(Server.MapPath("~/Media/Mini/"+url));
-            nuevaurl = "~/Media/Mini/" + url;
+            if (url!=null)
+            {
+                System.Drawing.Image img = System.Drawing.Image.FromFile(Server.MapPath("~/Media/"+url));
+                System.Drawing.Image thumb = img.GetThumbnailImage(230, 160, null, IntPtr.Zero);
+                img.Dispose();
+                thumb.Save(Server.MapPath("~/Media/Mini/"+url));
+                nuevaurl = "~/Media/Mini/" + url;
+            }
             return nuevaurl;
         }
         public void MuestraEventos()
@@ -70,6 +73,23 @@ namespace WebAppIntranetSkytex
             }
             dlEventos.DataSource = logica.ConsultaEventos(DateTime.Today, 1);
             dlEventos.DataBind();
+        }
+        public string DevuelveDiaMes(object fecha, int opc)
+        {
+            string DiaMes="";
+            if (fecha!=null)
+            {
+                DateTime fec = Convert.ToDateTime(fecha);
+                if (opc==1)
+                {
+                    DiaMes = fec.Day.ToString();
+                }
+                else
+                {
+                    DiaMes = String.Format("{0:MMMM}", fec);
+                }
+            }
+            return DiaMes;
         }
     }
 }

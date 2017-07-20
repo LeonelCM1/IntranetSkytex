@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Noticias.Master" AutoEventWireup="true" CodeBehind="AgregarNoticia.aspx.cs" Inherits="WebAppIntranetSkytex.AgregarNoticia" %>
+<%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <div class="container">
         <div class="panel panel-default">
@@ -18,15 +19,34 @@
                         <br />
                     </div>
                 </div>
-                <asp:TextBox ID="txtContenido" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="10"></asp:TextBox>
+                <div class="row">
+                    <div class="col-md-1" style="text-align:right;">
+                        <h4><strong>Resumen:</strong></h4>
+                        <br />
+                    </div>
+                    <div class="col-md-11">
+                        <asp:TextBox ID="txtResumen" runat="server" TextMode="MultiLine" CssClass="form-control" MaxLength="10"></asp:TextBox>
+                        <br />
+                    </div>
+                </div>
+                <CKEditor:CKEditorControl ID="CKEditor1" BasePath="~/ckeditor" runat="server"></CKEditor:CKEditorControl>
                 <br />
-                <div class="text-center">
-                    <asp:FileUpload runat="server" CssClass="text-center"/>
-                    <br />
-                    <asp:Image runat="server" ImageUrl="~/Media/Mini/z13wx0uhfwdy.png"/>
-                    <br />
-                    <br />
-                </div>dsa
+                <div class="row">
+                    <div class="col-md-4" style="text-align:right;">
+                        Miniatura: 
+                    </div>
+                    <div class="col-md-4">
+                        <asp:FileUpload ID="Imagen" runat="server" />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <asp:Button ID="btnAgregar" runat="server" Text="Agregar" CssClass="btn btn-success btn-lg" OnClick="btnAgregar_Click"/>
+                        &nbsp;
+                        <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-danger btn-lg"/>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

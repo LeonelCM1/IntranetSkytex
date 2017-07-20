@@ -13,6 +13,7 @@
     <!-- Referencia de archivos JavaScript en la carpeta Scripts -->
     <script type="text/javascript" src="<%= ResolveClientUrl("~/Scripts/jquery-1.10.2.js") %>"></script>
     <script type="text/javascript" src="<%= ResolveClientUrl("~/Scripts/bootstrap.js") %>"></script>
+    	
 </head>
 <body>
     <nav class="navbar navbar-inverse">
@@ -25,7 +26,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img alt="Brand" src="Media/skytex.ico" width="30" height="30"/><strong> Intranet Skytex</strong></a>
+            <a class="navbar-brand" href="Inicio.aspx"><img alt="Brand" src="Media/skytex.ico" width="30" height="30"/><strong> Intranet Skytex</strong></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

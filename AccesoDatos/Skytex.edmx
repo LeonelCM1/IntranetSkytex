@@ -5,9 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="developModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Develop.dbo.Intranet_Anuncios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Intranet_Anuncios">
           <Key>
             <PropertyRef Name="num_fol" />
+            
+            
+            
+            
+            
           </Key>
           <Property Name="num_fol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="titulo" Type="nvarchar" MaxLength="120" Nullable="false" />
@@ -16,9 +23,16 @@
           <Property Name="autor" Type="nchar" MaxLength="3" Nullable="false" />
           <Property Name="fecha_fin" Type="datetime" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Develop.dbo.Intranet_noticias' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Intranet_noticias">
           <Key>
             <PropertyRef Name="num_folio" />
+            
+            
+            
+            
+            
           </Key>
           <Property Name="num_folio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="titulo" Type="nvarchar" MaxLength="25" Nullable="false" />
@@ -33,9 +47,36 @@
           <Parameter Name="fecha_consulta" Type="datetime" Mode="In" />
           <Parameter Name="tipo" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_WebAppIntranetInsertaNoticia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="titulo" Type="nvarchar" Mode="In" />
+          <Parameter Name="noticia" Type="varchar(max)" Mode="In" />
+          <Parameter Name="resumen" Type="nvarchar" Mode="In" />
+          <Parameter Name="fecha" Type="datetime" Mode="In" />
+          <Parameter Name="imagenUrl" Type="nvarchar" Mode="In" />
+          <Parameter Name="autor" Type="nchar" Mode="In" />
+        </Function>
         <EntityContainer Name="developModelStoreContainer">
-          <EntitySet Name="Intranet_Anuncios" EntityType="Self.Intranet_Anuncios" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Intranet_noticias" EntityType="Self.Intranet_noticias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Intranet_Anuncios" EntityType="Self.Intranet_Anuncios" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Intranet_Anuncios].[num_fol] AS [num_fol], 
+    [Intranet_Anuncios].[titulo] AS [titulo], 
+    [Intranet_Anuncios].[texto] AS [texto], 
+    [Intranet_Anuncios].[fecha] AS [fecha], 
+    [Intranet_Anuncios].[autor] AS [autor], 
+    [Intranet_Anuncios].[fecha_fin] AS [fecha_fin]
+    FROM [dbo].[Intranet_Anuncios] AS [Intranet_Anuncios]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Intranet_noticias" EntityType="Self.Intranet_noticias" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Intranet_noticias].[num_folio] AS [num_folio], 
+    [Intranet_noticias].[titulo] AS [titulo], 
+    [Intranet_noticias].[noticia] AS [noticia], 
+    [Intranet_noticias].[resumen] AS [resumen], 
+    [Intranet_noticias].[fecha] AS [fecha], 
+    [Intranet_noticias].[imagenUrl] AS [imagenUrl], 
+    [Intranet_noticias].[autor] AS [autor]
+    FROM [dbo].[Intranet_noticias] AS [Intranet_noticias]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -46,8 +87,16 @@
           <EntitySet Name="Intranet_Anuncios" EntityType="developModel.Intranet_Anuncios" />
           <EntitySet Name="Intranet_noticias" EntityType="developModel.Intranet_noticias" />
           <FunctionImport Name="sp_WebAppIntranetConsultaEventos" ReturnType="Collection(developModel.sp_WebAppIntranetConsultaEventos_Result)">
-          <Parameter Name="fecha_consulta" Mode="In" Type="DateTime" />
+            <Parameter Name="fecha_consulta" Mode="In" Type="DateTime" />
             <Parameter Name="tipo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_WebAppIntranetInsertaNoticia" ReturnType="Collection(developModel.sp_WebAppIntranetInsertaNoticia_Result)">
+            <Parameter Name="titulo" Mode="In" Type="String" />
+            <Parameter Name="noticia" Mode="In" Type="String" />
+            <Parameter Name="resumen" Mode="In" Type="String" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="imagenUrl" Mode="In" Type="String" />
+            <Parameter Name="autor" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_WebAppIntranetConsultaAnuncios_Result">
@@ -85,6 +134,10 @@
           <Property Type="DateTime" Name="fecha_ini" Nullable="false" Precision="23" />
           <Property Type="DateTime" Name="fecha_fin" Nullable="false" Precision="23" />
           <Property Type="String" Name="autor" Nullable="false" MaxLength="3" />
+        </ComplexType>
+        <ComplexType Name="sp_WebAppIntranetInsertaNoticia_Result">
+          <Property Type="Int16" Name="error" Nullable="true" />
+          <Property Type="String" Name="mensaje" Nullable="true" MaxLength="25" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -135,6 +188,14 @@
                 <ScalarProperty Name="fecha_ini" ColumnName="fecha_ini" />
                 <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
                 <ScalarProperty Name="autor" ColumnName="autor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_WebAppIntranetInsertaNoticia" FunctionName="developModel.Store.sp_WebAppIntranetInsertaNoticia">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="developModel.sp_WebAppIntranetInsertaNoticia_Result">
+                <ScalarProperty Name="error" ColumnName="error" />
+                <ScalarProperty Name="mensaje" ColumnName="mensaje" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

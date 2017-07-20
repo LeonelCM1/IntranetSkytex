@@ -27,5 +27,13 @@ namespace LogicaNegocio
         {
             return (datos.ConsultaEventos(fecha,tipo));
         }
+        public sp_WebAppIntranetInsertaNoticia_Result InsertaNoticia(string titulo, string noticia, string resumen, DateTime fecha, string imagen, string autor)
+        {
+            return (datos.InsertarNoticia(titulo, noticia, resumen, fecha, imagen, autor));
+        }
+        public Intranet_noticias ConsultaNoticiaPorFolio(int folio)
+        {
+            return (datos.ConsultaNoticiaPorFolio(folio));
+        }
     }
 }
