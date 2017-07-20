@@ -25,7 +25,7 @@ namespace WebAppIntranetSkytex
         public string validaImagen(object url)
         {
             string disponible = "";
-            if (url!=null)
+            if (url != null && url != "")
             {
                 disponible="display:initial;";
             }
@@ -38,7 +38,7 @@ namespace WebAppIntranetSkytex
         public string validaImagen2(object url)
         {
             string size = "";
-            if (url!=null)
+            if (url != null && url != "")
             {
                 size = "col-md-8";
             }
@@ -51,7 +51,7 @@ namespace WebAppIntranetSkytex
         public string miniatura(object url)
         {
             string nuevaurl = "";
-            if (url!=null)
+            if (url!=null && url!="")
             {
                 System.Drawing.Image img = System.Drawing.Image.FromFile(Server.MapPath("~/Media/"+url));
                 System.Drawing.Image thumb = img.GetThumbnailImage(230, 160, null, IntPtr.Zero);

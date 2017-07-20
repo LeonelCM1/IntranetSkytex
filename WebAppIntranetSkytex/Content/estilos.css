@@ -1,3 +1,7 @@
-﻿.imagen{
-    width: 90%;
+﻿
+img:not(.classy){
+  display: block;
+  height: auto;
+  max-width: 100%;
+  page-break-inside: avoid;
 }

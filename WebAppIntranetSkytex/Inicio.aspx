@@ -69,7 +69,7 @@
                                       </div>
                                   </div>
                                   <div class="row">
-                                      <div class="col-md-4  " style="<%# validaImagen(Eval("imagenUrl")) %>" >
+                                      <div class="col-md-4  text-center" style="<%# validaImagen(Eval("imagenUrl")) %>" >
                                           <!-- Imagen de la noticia -->
                                           <asp:Image ID="Image1" runat="server" ImageUrl='<%# miniatura(Eval("imagenUrl")) %>' CssClass="img-rounded" BorderStyle="Double" BorderWidth="1"/>
                                       </div> 

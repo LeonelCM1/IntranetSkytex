@@ -185,10 +185,6 @@
     <Content Include="ckeditor\plugins\a11yhelp\dialogs\lang\_translationstatus.txt" />
     <Content Include="ckeditor\plugins\base64image\dialogs\base64image.js" />
     <Content Include="ckeditor\plugins\dialog\dialogDefinition.js" />
-    <Content Include="ckeditor\plugins\emojione\dialogs\emojione.js" />
-    <Content Include="ckeditor\plugins\emojione\libs\emojione\emojione.min.js" />
-    <Content Include="ckeditor\plugins\emojione\styles\emojione-awesome.css" />
-    <Content Include="ckeditor\plugins\emojione\styles\emojione.css" />
     <Content Include="ckeditor\plugins\icons.png" />
     <Content Include="ckeditor\plugins\icons_hidpi.png" />
     <Content Include="ckeditor\plugins\link\dialogs\anchor.js" />
@@ -361,10 +357,6 @@
     <Content Include="ckeditor\LICENSE.md" />
     <Content Include="ckeditor\plugins\base64image\LICENSE.md" />
     <Content Include="ckeditor\plugins\base64image\README.md" />
-    <Content Include="ckeditor\plugins\emojione\.bower.json" />
-    <Content Include="ckeditor\plugins\emojione\.gitignore" />
-    <Content Include="ckeditor\plugins\emojione\bower.json" />
-    <Content Include="ckeditor\plugins\emojione\README.md" />
     <Content Include="ckeditor\plugins\scayt\CHANGELOG.md" />
     <Content Include="ckeditor\plugins\scayt\LICENSE.md" />
     <Content Include="ckeditor\plugins\scayt\README.md" />

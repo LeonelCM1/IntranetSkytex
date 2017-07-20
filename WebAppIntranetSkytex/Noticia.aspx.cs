@@ -19,22 +19,32 @@ namespace WebAppIntranetSkytex
                 int folio = Convert.ToInt32(Request.QueryString["n"]);
                 Intranet_noticias noticia = logica.ConsultaNoticiaPorFolio(folio);
                 lblTitulo.Text = noticia.titulo;
-                if (noticia.imagenUrl!=null)
+                if (noticia.imagenUrl!=null && noticia.imagenUrl!="")
                 {
                     Image1.Visible = true;
                     Image1.ImageUrl = "~/Media/Mini/" + noticia.imagenUrl;
                 }
                 else
                 {
-                    Image1.Visible = false;
+                    Image1.Visible = divImagen.Visible = divVacio.Visible = false;
                 }
-                lblNoticia.Text = noticia.noticia;
+                //lblNoticia.Text = noticia.noticia;
+                Literal1.Text = noticia.noticia;
             }
             else
             {
                 Response.Redirect("Inicio.aspx");
             }
             
+        }
+        public string Validar()
+        {
+            string medida = "col-md-8 text-center";
+            if (!Image1.Visible)
+            {
+                medida = "col-md-12 text-center";
+            }
+            return medida;
         }
     }
 }

@@ -41,6 +41,7 @@ C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\
 C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\bin\LogicaNegocio.dll
 C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\bin\Microsoft.AspNet.FriendlyUrls.dll
 C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\bin\Microsoft.QualityTools.Testing.Fakes.dll
 C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\bin\Microsoft.ScriptManager.MSAjax.dll
 C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\bin\Microsoft.ScriptManager.WebForms.dll
 C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\bin\Microsoft.Web.Infrastructure.dll
@@ -60,4 +61,3 @@ C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\
 C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\obj\Debug\WebAppIntranetSkytex.csprojResolveAssemblyReference.cache
 C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\obj\Debug\WebAppIntranetSkytex.dll
 C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\obj\Debug\WebAppIntranetSkytex.pdb
-C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\bin\Microsoft.QualityTools.Testing.Fakes.dll

@@ -42,12 +42,31 @@
                 <br />
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <asp:Button ID="btnAgregar" runat="server" Text="Agregar" CssClass="btn btn-success btn-lg" OnClick="btnAgregar_Click"/>
+                        <asp:Button ID="btnAgregar" runat="server" Text="Agregar" CssClass="btn btn-success btn-lg" OnClick="btnAgregar_Click" OnClientClick="return validar()"/>
                         &nbsp;
-                        <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-danger btn-lg"/>
+                        <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-danger btn-lg" OnClick="btnCancelar_Click"/>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        function validar() {
+            var contenido = CKEDITOR.instances['<%=CKEditor1.ClientID%>'].getData();
+            if ($('#<%=txtTitulo.ClientID%>').val() === '') {
+                alert('Completar todos los campos');
+                return false;
+            } else if ($('#<%=txtResumen.ClientID%>').val() === '') {
+                alert('Completar todos los campos');
+                return false;
+            } else if (contenido==='') {
+                alert('Completar todos los campos');
+                return false;
+            } else if (document.getElementById('<%= Imagen.ClientID %>').files.length === 0) {
+                return confirm('¿Desea agregar la noticia sin miniatura?');
+            }else {
+                return true;
+            }
+        }
+    </script>
 </asp:Content>
