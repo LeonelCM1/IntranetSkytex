@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Noticias.Master" AutoEventWireup="true" CodeBehind="Inicio.aspx.cs" Inherits="WebAppIntranetSkytex.Inicio" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
 <div class="row">
     <div class="col-md-3">
         <div class="panel panel-default">
@@ -8,10 +9,11 @@
                 <div class="list-group">
                     <asp:DataList ID="dtAnuncios" runat="server" Width="100%" >
                         <ItemTemplate>
-                            <a href="#" class="list-group-item"><%# Eval("titulo").ToString() %></a>
+                            <a href="#" class="list-group-item" data-toggle="modal" data-target="#ModalAnuncio" data-titulo="<%#Eval("titulo") %>" data-texto="<%#Eval("texto") %>" data-folio="<%# Eval("num_fol") %>"><%# Eval("titulo").ToString() %></a>
                         </ItemTemplate>
                     </asp:DataList>
                 </div>
+                <a href="#" data-toggle="modal" data-target="#NuevoAnuncio"><span aria-hidden="true" class="glyphicon glyphicon-plus"></span> Nuevo Anuncio</a>
             </div>
         </div>
         <div class="panel panel-default">
@@ -89,4 +91,98 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="ModalAnuncio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h3><asp:Label ID="Label1" runat="server" Text="Label"></asp:Label></h3>
+      </div>
+      <div class="modal-body">
+          <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
+          <br /><br />
+      </div>
+      <div class="modal-footer">
+          <div class="text-center">
+            <a id="btnEditAnuncio" class="btn btn-info" href="#" role="button">Editar Anuncio</a>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="NuevoAnuncio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h3>Nuevo Anuncio</h3>
+      </div>
+      <div class="modal-body">
+          <div class="row">
+              <div class="col-md-2">
+                  <h4>Titulo:</h4>
+              </div>
+              <div class="col-md-10">
+                  <asp:TextBox ID="txtNuevoTitulo" runat="server" CssClass="form-control"></asp:TextBox>
+              </div>
+          </div>
+          <br />
+          <div class="row">
+              <div class="col-md-2">
+                  <h4>Aviso:</h4>
+              </div>
+              <div class="col-md-10">
+                  <asp:TextBox ID="txtNuevoTexto" runat="server" CssClass="form-control" Rows="5" TextMode="MultiLine"></asp:TextBox>
+              </div>
+          </div>
+          <br />
+          <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-3">
+                  <h4>Fecha de fin:</h4>
+              </div>
+              <div class="col-md-4">
+                  <asp:TextBox ID="txtNuevaFechaFin" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+              </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+          <div class="text-center">
+              <div class="row">
+                  <div class="col-md-12 text-center">
+                      <asp:Button ID="btnAgregarAnuncio" runat="server" Text="Agregar" CssClass="btn btn-success" OnClientClick="return validar()" OnClick="btnAgregarAnuncio_Click" />
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    $('#ModalAnuncio').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var titulo = button.data('titulo')
+        var texto = button.data('texto')
+        var folio = button.data('folio')
+        $('#<%=Label1.ClientID%>').text(titulo);
+        $('#<%=Label2.ClientID%>').text(texto);
+        $('#btnEditAnuncio').attr('href', '/Editar_Anuncio.aspx?fol='+folio);
+    })
+    function validar() {
+        if ($('#<%=txtNuevoTitulo.ClientID%>').val() === '') {
+            alert('Completar todos los campos');
+            return false;
+        } else if ($('#<%=txtNuevoTexto.ClientID%>').val() === '') {
+            alert('Completar todos los campos');
+            return false;
+        } else if ($('#<%=txtNuevaFechaFin.ClientID%>').val() === '') {
+            alert('Completar todos los campos');
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>
 </asp:Content>

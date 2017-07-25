@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Entidades;
 using LogicaNegocio;
+using System.Web.Services;
 
 namespace WebAppIntranetSkytex
 {
@@ -17,7 +18,7 @@ namespace WebAppIntranetSkytex
         {
             GridNoticias.DataSource = logica.ConsultaNoticias();
             GridNoticias.DataBind();
-            dtAnuncios.DataSource = logica.ConsultaAnuncios();
+            dtAnuncios.DataSource = logica.ConsultaAnuncios(0);
             dtAnuncios.DataBind();
             dates = Calendario.SelectedDates;
             MuestraEventos();
@@ -90,6 +91,29 @@ namespace WebAppIntranetSkytex
                 }
             }
             return DiaMes;
+        }
+        protected void btnAgregarAnuncio_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string titulo = txtNuevoTitulo.Text;
+                string texto = txtNuevoTexto.Text;
+                DateTime fecha_fin = Convert.ToDateTime(txtNuevaFechaFin.Text);
+                WebAppIntranetAdmAnuncios_Result resultado = logica.AdminAnuncios(0, titulo, texto, DateTime.Today, "LNC", fecha_fin, 1);
+                if (resultado.error==0)
+                {
+                    txtNuevoTitulo.Text = txtNuevoTexto.Text = txtNuevaFechaFin.Text = "";
+                    Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
+                }
+                else
+                {
+                    Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
+                }
+            }
+            catch (Exception message)
+            {
+                Response.Write("<script type=\"text/javascript\">alert('" + message + "');window.location.href = 'Inicio.aspx';</script>");
+            }
         }
     }
 }

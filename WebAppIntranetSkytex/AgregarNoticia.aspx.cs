@@ -36,12 +36,11 @@ namespace WebAppIntranetSkytex
             }
             else if (txtTitulo.Text!="" && CKEditor1.Text!="")
             {
-                string noticia = "<div class=\"container\">" + CKEditor1.Text + "</div>";
-                sp_WebAppIntranetInsertaNoticia_Result resultado = logica.InsertaNoticia(txtTitulo.Text,noticia, txtResumen.Text, DateTime.Now, fileName, "LNC");//user
+                string noticia = CKEditor1.Text;
+                WebAppIntranetAdmNoticia_Result resultado = logica.AdminNoticias(0,txtTitulo.Text,noticia, txtResumen.Text, DateTime.Today, fileName, "LNC",1);//user
                 if (resultado.error==0)
                 {
-                    Response.Write("<script type=\"text/javascript\">alert('Noticia Agregada correctamente');</script>");
-                    Response.Redirect("Inicio.aspx");
+                    Response.Write("<script type=\"text/javascript\">alert('Noticia Agregada Correctamente');window.location.href = 'Inicio.aspx';</script>");
                 }
                 else
                 {

@@ -22,6 +22,9 @@
                         <asp:Literal ID="Literal1" runat="server"></asp:Literal>
                     </div>
                 </div>
+                <div class="text-center">
+                    <a class="btn btn-info" href="/Editar_Noticia.aspx?n=<%=fol%>" role="button">Editar</a>
+                </div>
             </div>
         </div>
     </div>

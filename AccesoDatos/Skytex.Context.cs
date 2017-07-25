@@ -30,11 +30,6 @@ namespace Entidades
         public virtual DbSet<Intranet_Anuncios> Intranet_Anuncios { get; set; }
         public virtual DbSet<Intranet_noticias> Intranet_noticias { get; set; }
     
-        public virtual ObjectResult<sp_WebAppIntranetConsultaAnuncios_Result> sp_WebAppIntranetConsultaAnuncios()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_WebAppIntranetConsultaAnuncios_Result>("sp_WebAppIntranetConsultaAnuncios");
-        }
-    
         public virtual ObjectResult<sp_WebAppIntranetConsultaEventos_Result> sp_WebAppIntranetConsultaEventos(Nullable<System.DateTime> fecha_consulta, Nullable<int> tipo)
         {
             var fecha_consultaParameter = fecha_consulta.HasValue ?
@@ -75,6 +70,85 @@ namespace Entidades
                 new ObjectParameter("autor", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_WebAppIntranetInsertaNoticia_Result>("sp_WebAppIntranetInsertaNoticia", tituloParameter, noticiaParameter, resumenParameter, fechaParameter, imagenUrlParameter, autorParameter);
+        }
+    
+        public virtual ObjectResult<WebAppIntranetAdmAnuncios_Result> WebAppIntranetAdmAnuncios(Nullable<int> num_fol, string titulo, string texto, Nullable<System.DateTime> fecha, string autor, Nullable<System.DateTime> fecha_fin, Nullable<short> opcion)
+        {
+            var num_folParameter = num_fol.HasValue ?
+                new ObjectParameter("num_fol", num_fol) :
+                new ObjectParameter("num_fol", typeof(int));
+    
+            var tituloParameter = titulo != null ?
+                new ObjectParameter("titulo", titulo) :
+                new ObjectParameter("titulo", typeof(string));
+    
+            var textoParameter = texto != null ?
+                new ObjectParameter("texto", texto) :
+                new ObjectParameter("texto", typeof(string));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            var autorParameter = autor != null ?
+                new ObjectParameter("autor", autor) :
+                new ObjectParameter("autor", typeof(string));
+    
+            var fecha_finParameter = fecha_fin.HasValue ?
+                new ObjectParameter("fecha_fin", fecha_fin) :
+                new ObjectParameter("fecha_fin", typeof(System.DateTime));
+    
+            var opcionParameter = opcion.HasValue ?
+                new ObjectParameter("opcion", opcion) :
+                new ObjectParameter("opcion", typeof(short));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WebAppIntranetAdmAnuncios_Result>("WebAppIntranetAdmAnuncios", num_folParameter, tituloParameter, textoParameter, fechaParameter, autorParameter, fecha_finParameter, opcionParameter);
+        }
+    
+        public virtual ObjectResult<sp_WebAppIntranetConsultaAnuncios_Result> sp_WebAppIntranetConsultaAnuncios(Nullable<int> num_fol)
+        {
+            var num_folParameter = num_fol.HasValue ?
+                new ObjectParameter("num_fol", num_fol) :
+                new ObjectParameter("num_fol", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_WebAppIntranetConsultaAnuncios_Result>("sp_WebAppIntranetConsultaAnuncios", num_folParameter);
+        }
+    
+        public virtual ObjectResult<WebAppIntranetAdmNoticia_Result> WebAppIntranetAdmNoticia(Nullable<int> num_fol, string titulo, string noticia, string resumen, Nullable<System.DateTime> fecha, string imagenUrl, string autor, Nullable<short> opcion)
+        {
+            var num_folParameter = num_fol.HasValue ?
+                new ObjectParameter("num_fol", num_fol) :
+                new ObjectParameter("num_fol", typeof(int));
+    
+            var tituloParameter = titulo != null ?
+                new ObjectParameter("titulo", titulo) :
+                new ObjectParameter("titulo", typeof(string));
+    
+            var noticiaParameter = noticia != null ?
+                new ObjectParameter("noticia", noticia) :
+                new ObjectParameter("noticia", typeof(string));
+    
+            var resumenParameter = resumen != null ?
+                new ObjectParameter("resumen", resumen) :
+                new ObjectParameter("resumen", typeof(string));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            var imagenUrlParameter = imagenUrl != null ?
+                new ObjectParameter("imagenUrl", imagenUrl) :
+                new ObjectParameter("imagenUrl", typeof(string));
+    
+            var autorParameter = autor != null ?
+                new ObjectParameter("autor", autor) :
+                new ObjectParameter("autor", typeof(string));
+    
+            var opcionParameter = opcion.HasValue ?
+                new ObjectParameter("opcion", opcion) :
+                new ObjectParameter("opcion", typeof(short));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WebAppIntranetAdmNoticia_Result>("WebAppIntranetAdmNoticia", num_folParameter, tituloParameter, noticiaParameter, resumenParameter, fechaParameter, imagenUrlParameter, autorParameter, opcionParameter);
         }
     }
 }

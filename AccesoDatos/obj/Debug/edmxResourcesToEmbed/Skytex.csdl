@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="developModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="developEntities" annotation:LazyLoadingEnabled="true">
-    <FunctionImport Name="sp_WebAppIntranetConsultaAnuncios" ReturnType="Collection(developModel.sp_WebAppIntranetConsultaAnuncios_Result)" />
     <EntitySet Name="Intranet_Anuncios" EntityType="developModel.Intranet_Anuncios" />
     <EntitySet Name="Intranet_noticias" EntityType="developModel.Intranet_noticias" />
     <FunctionImport Name="sp_WebAppIntranetConsultaEventos" ReturnType="Collection(developModel.sp_WebAppIntranetConsultaEventos_Result)">
@@ -16,13 +15,29 @@
       <Parameter Name="imagenUrl" Mode="In" Type="String" />
       <Parameter Name="autor" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="WebAppIntranetAdmAnuncios" ReturnType="Collection(developModel.WebAppIntranetAdmAnuncios_Result)">
+      <Parameter Name="num_fol" Mode="In" Type="Int32" />
+      <Parameter Name="titulo" Mode="In" Type="String" />
+      <Parameter Name="texto" Mode="In" Type="String" />
+      <Parameter Name="fecha" Mode="In" Type="DateTime" />
+      <Parameter Name="autor" Mode="In" Type="String" />
+      <Parameter Name="fecha_fin" Mode="In" Type="DateTime" />
+      <Parameter Name="opcion" Mode="In" Type="Int16" />
+    </FunctionImport>
+    <FunctionImport Name="sp_WebAppIntranetConsultaAnuncios" ReturnType="Collection(developModel.sp_WebAppIntranetConsultaAnuncios_Result)">
+      <Parameter Name="num_fol" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="WebAppIntranetAdmNoticia" ReturnType="Collection(developModel.WebAppIntranetAdmNoticia_Result)">
+      <Parameter Name="num_fol" Mode="In" Type="Int32" />
+      <Parameter Name="titulo" Mode="In" Type="String" />
+      <Parameter Name="noticia" Mode="In" Type="String" />
+      <Parameter Name="resumen" Mode="In" Type="String" />
+      <Parameter Name="fecha" Mode="In" Type="DateTime" />
+      <Parameter Name="imagenUrl" Mode="In" Type="String" />
+      <Parameter Name="autor" Mode="In" Type="String" />
+      <Parameter Name="opcion" Mode="In" Type="Int16" />
+    </FunctionImport>
   </EntityContainer>
-  <ComplexType Name="sp_WebAppIntranetConsultaAnuncios_Result">
-    <Property Type="Int32" Name="num_fol" Nullable="false" />
-    <Property Type="String" Name="titulo" Nullable="false" MaxLength="120" />
-    <Property Type="DateTime" Name="fecha" Nullable="false" Precision="23" />
-    <Property Type="String" Name="autor" Nullable="false" MaxLength="3" />
-  </ComplexType>
   <EntityType Name="Intranet_Anuncios">
     <Key>
       <PropertyRef Name="num_fol" />
@@ -56,5 +71,21 @@
   <ComplexType Name="sp_WebAppIntranetInsertaNoticia_Result">
     <Property Type="Int16" Name="error" Nullable="true" />
     <Property Type="String" Name="mensaje" Nullable="true" MaxLength="25" />
+  </ComplexType>
+  <ComplexType Name="WebAppIntranetAdmAnuncios_Result">
+    <Property Type="Int16" Name="error" Nullable="true" />
+    <Property Type="String" Name="mensaje" Nullable="true" MaxLength="25" />
+  </ComplexType>
+  <ComplexType Name="sp_WebAppIntranetConsultaAnuncios_Result">
+    <Property Type="Int32" Name="num_fol" Nullable="false" />
+    <Property Type="String" Name="titulo" Nullable="false" MaxLength="120" />
+    <Property Type="String" Name="texto" Nullable="false" MaxLength="255" />
+    <Property Type="DateTime" Name="fecha" Nullable="false" Precision="23" />
+    <Property Type="String" Name="autor" Nullable="false" MaxLength="3" />
+    <Property Type="DateTime" Name="fecha_fin" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="WebAppIntranetAdmNoticia_Result">
+    <Property Type="Int16" Name="error" Nullable="true" />
+    <Property Type="String" Name="mensaje" Nullable="true" MaxLength="40" />
   </ComplexType>
 </Schema>

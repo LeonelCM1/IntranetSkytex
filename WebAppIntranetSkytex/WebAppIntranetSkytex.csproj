@@ -342,6 +342,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\estilos.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Editar_Anuncio.aspx" />
+    <Content Include="Editar_Noticia.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Inicio.aspx" />
     <Content Include="Media\skytex.ico" />
@@ -424,6 +426,20 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Editar_Anuncio.aspx.cs">
+      <DependentUpon>Editar_Anuncio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Editar_Anuncio.aspx.designer.cs">
+      <DependentUpon>Editar_Anuncio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Editar_Noticia.aspx.cs">
+      <DependentUpon>Editar_Noticia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Editar_Noticia.aspx.designer.cs">
+      <DependentUpon>Editar_Noticia.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

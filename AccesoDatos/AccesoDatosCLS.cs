@@ -23,9 +23,9 @@ namespace AccesoDatos
             return Noticias;
         }
 
-        public List<sp_WebAppIntranetConsultaAnuncios_Result> ConsultaAnuncios()
+        public List<sp_WebAppIntranetConsultaAnuncios_Result> ConsultaAnuncios(int fol)
         {
-            List<sp_WebAppIntranetConsultaAnuncios_Result> anuncios = contexto.sp_WebAppIntranetConsultaAnuncios().ToList();
+            List<sp_WebAppIntranetConsultaAnuncios_Result> anuncios = contexto.sp_WebAppIntranetConsultaAnuncios(fol).ToList();
             SqlConnection.ClearAllPools();
             return anuncios;
         }
@@ -35,12 +35,6 @@ namespace AccesoDatos
             SqlConnection.ClearAllPools();
             return eventos;
         }
-        public sp_WebAppIntranetInsertaNoticia_Result InsertarNoticia(string titulo, string noticia, string resumen, DateTime fecha, string imagen, string autor)
-        {
-            sp_WebAppIntranetInsertaNoticia_Result resultado = contexto.sp_WebAppIntranetInsertaNoticia(titulo, noticia, resumen, fecha, imagen, autor).FirstOrDefault();
-            SqlConnection.ClearAllPools();
-            return resultado;
-        }
         public Intranet_noticias ConsultaNoticiaPorFolio(int folio)
         {
             Intranet_noticias Noticia = (from u in contexto.Intranet_noticias 
@@ -48,6 +42,24 @@ namespace AccesoDatos
                                           select u).FirstOrDefault();
             SqlConnection.ClearAllPools();
             return Noticia;
+        }
+        public sp_WebAppIntranetConsultaAnuncios_Result AnuncioPorFolio(int fol)
+        {
+            sp_WebAppIntranetConsultaAnuncios_Result anuncios = contexto.sp_WebAppIntranetConsultaAnuncios(fol).FirstOrDefault();
+            SqlConnection.ClearAllPools();
+            return anuncios;
+        }
+        public WebAppIntranetAdmAnuncios_Result AdminAnuncios(int num_fol, string titulo, string texto, DateTime fecha, string autor, DateTime fecha_fin, short opcion)
+        {
+            WebAppIntranetAdmAnuncios_Result resultado = contexto.WebAppIntranetAdmAnuncios(num_fol, titulo, texto, fecha, autor, fecha_fin, opcion).FirstOrDefault();
+            SqlConnection.ClearAllPools();
+            return resultado;
+        }
+        public WebAppIntranetAdmNoticia_Result AdminNoticias(int folio, string titulo, string noticia, string resumen, DateTime fecha, string imagen, string autor, short opcion)
+        {
+            WebAppIntranetAdmNoticia_Result resultado = contexto.WebAppIntranetAdmNoticia(folio, titulo, noticia, resumen, fecha, imagen, autor, opcion).FirstOrDefault();
+            SqlConnection.ClearAllPools();
+            return resultado;
         }
     }
 }

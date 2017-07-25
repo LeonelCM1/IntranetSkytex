@@ -72,6 +72,12 @@
     <Compile Include="sp_WebAppIntranetInsertaNoticia_Result.cs">
       <DependentUpon>Skytex.tt</DependentUpon>
     </Compile>
+    <Compile Include="WebAppIntranetAdmAnuncios_Result.cs">
+      <DependentUpon>Skytex.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WebAppIntranetAdmNoticia_Result.cs">
+      <DependentUpon>Skytex.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Skytex.Context.tt">

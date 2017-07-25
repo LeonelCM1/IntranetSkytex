@@ -19,21 +19,29 @@ namespace LogicaNegocio
         {
             return (datos.ConsultaNoticias());
         }
-        public List<sp_WebAppIntranetConsultaAnuncios_Result> ConsultaAnuncios()
+        public List<sp_WebAppIntranetConsultaAnuncios_Result> ConsultaAnuncios(int fol)
         {
-            return (datos.ConsultaAnuncios());
+            return (datos.ConsultaAnuncios(fol));
         }
         public List<sp_WebAppIntranetConsultaEventos_Result> ConsultaEventos(DateTime fecha, int tipo)
         {
             return (datos.ConsultaEventos(fecha,tipo));
         }
-        public sp_WebAppIntranetInsertaNoticia_Result InsertaNoticia(string titulo, string noticia, string resumen, DateTime fecha, string imagen, string autor)
-        {
-            return (datos.InsertarNoticia(titulo, noticia, resumen, fecha, imagen, autor));
-        }
         public Intranet_noticias ConsultaNoticiaPorFolio(int folio)
         {
             return (datos.ConsultaNoticiaPorFolio(folio));
+        }
+        public sp_WebAppIntranetConsultaAnuncios_Result AnuncioPorFolio(int folio)
+        {
+            return (datos.AnuncioPorFolio(folio));
+        }
+        public WebAppIntranetAdmAnuncios_Result AdminAnuncios(int num_fol, string titulo, string texto, DateTime fecha, string autor, DateTime fecha_fin, short opcion)
+        {
+            return (datos.AdminAnuncios(num_fol, titulo, texto, fecha, autor, fecha_fin, opcion));
+        }
+        public WebAppIntranetAdmNoticia_Result AdminNoticias(int num_fol, string titulo, string noticia, string resumen, DateTime fecha, string imagen, string autor, short opcion)
+        {
+            return (datos.AdminNoticias(num_fol, titulo, noticia, resumen, fecha, imagen, autor, opcion));
         }
     }
 }
