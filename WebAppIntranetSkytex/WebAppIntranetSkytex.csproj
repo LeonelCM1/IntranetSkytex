@@ -342,10 +342,14 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\estilos.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Cumpleañeros.aspx" />
     <Content Include="Editar_Anuncio.aspx" />
+    <Content Include="Editar_Evento.aspx" />
     <Content Include="Editar_Noticia.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Inicio.aspx" />
+    <Content Include="Media\Liston.png" />
+    <Content Include="Media\LogoSkytex.jpg" />
     <Content Include="Media\skytex.ico" />
     <Content Include="Media\user-male-icon_34332.png" />
     <Content Include="Media\z13wx0uhfwdy.png" />
@@ -426,12 +430,26 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Cumpleañeros.aspx.cs">
+      <DependentUpon>Cumpleañeros.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cumpleañeros.aspx.designer.cs">
+      <DependentUpon>Cumpleañeros.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Editar_Anuncio.aspx.cs">
       <DependentUpon>Editar_Anuncio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Editar_Anuncio.aspx.designer.cs">
       <DependentUpon>Editar_Anuncio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Editar_Evento.aspx.cs">
+      <DependentUpon>Editar_Evento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Editar_Evento.aspx.designer.cs">
+      <DependentUpon>Editar_Evento.aspx</DependentUpon>
     </Compile>
     <Compile Include="Editar_Noticia.aspx.cs">
       <DependentUpon>Editar_Noticia.aspx</DependentUpon>

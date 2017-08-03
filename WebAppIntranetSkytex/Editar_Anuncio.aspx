@@ -32,9 +32,9 @@
                 </div>
                 <br />
                 <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-1">
-                        <h4><strong>Anuncio:</strong></h4>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2" style="text-align:right;">
+                        <h4><strong>Fecha final:</strong></h4>
                         <br />
                     </div>
                     <div class="col-md-2">

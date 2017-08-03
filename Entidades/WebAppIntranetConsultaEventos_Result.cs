@@ -11,9 +11,15 @@ namespace Entidades
 {
     using System;
     
-    public partial class WebAppIntranetAdmAnuncios_Result
+    public partial class WebAppIntranetConsultaEventos_Result
     {
-        public Nullable<short> error { get; set; }
-        public string mensaje { get; set; }
+        public int num_fol { get; set; }
+        public string titulo { get; set; }
+        public string texto { get; set; }
+        public System.DateTime fecha_publi { get; set; }
+        public string autor { get; set; }
+        public System.DateTime fecha_ini { get; set; }
+        public System.DateTime fecha_fin { get; set; }
+        public short sw_anuncio { get; set; }
     }
 }

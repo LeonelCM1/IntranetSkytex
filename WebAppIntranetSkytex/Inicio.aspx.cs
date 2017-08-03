@@ -7,21 +7,21 @@ using System.Web.UI.WebControls;
 using Entidades;
 using LogicaNegocio;
 using System.Web.Services;
+using System.Drawing;
 
 namespace WebAppIntranetSkytex
 {
     public partial class Inicio : System.Web.UI.Page
     {
         LogicaNegocioCLS logica = new LogicaNegocioCLS();
-        SelectedDatesCollection dates;
         protected void Page_Load(object sender, EventArgs e)
         {
             GridNoticias.DataSource = logica.ConsultaNoticias();
             GridNoticias.DataBind();
-            dtAnuncios.DataSource = logica.ConsultaAnuncios(0);
+            dtAnuncios.DataSource = logica.ConsultaAnuncios();
             dtAnuncios.DataBind();
-            dates = Calendario.SelectedDates;
-            MuestraEventos();
+            dlEventos.DataSource = logica.ConsultaEventos(DateTime.Today,0, 2,0);
+            dlEventos.DataBind();
         }
         public string validaImagen(object url)
         {
@@ -62,19 +62,6 @@ namespace WebAppIntranetSkytex
             }
             return nuevaurl;
         }
-        public void MuestraEventos()
-        {
-            List<sp_WebAppIntranetConsultaEventos_Result> eventos = logica.ConsultaEventos(DateTime.Today,2);
-            foreach (var item in eventos)
-            {
-                for (int i = item.fecha_ini.Day; i <=item.fecha_fin.Day; i++)
-                {
-                    dates.Add(Convert.ToDateTime(i + "/" + DateTime.Today.Month + "/2017"));
-                }
-            }
-            dlEventos.DataSource = logica.ConsultaEventos(DateTime.Today, 1);
-            dlEventos.DataBind();
-        }
         public string DevuelveDiaMes(object fecha, int opc)
         {
             string DiaMes="";
@@ -99,10 +86,108 @@ namespace WebAppIntranetSkytex
                 string titulo = txtNuevoTitulo.Text;
                 string texto = txtNuevoTexto.Text;
                 DateTime fecha_fin = Convert.ToDateTime(txtNuevaFechaFin.Text);
-                WebAppIntranetAdmAnuncios_Result resultado = logica.AdminAnuncios(0, titulo, texto, DateTime.Today, "LNC", fecha_fin, 1);
+                WebAppIntranetAdmEventos_Result resultado = logica.AdminAnuncios(0, titulo, texto, DateTime.Today.Date, "LNC",DateTime.Today.Date, fecha_fin,1, 1);
                 if (resultado.error==0)
                 {
                     txtNuevoTitulo.Text = txtNuevoTexto.Text = txtNuevaFechaFin.Text = "";
+                    Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
+                }
+                else
+                {
+                    Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
+                }
+            }
+            catch (Exception message)
+            {
+                Response.Write("<script type=\"text/javascript\">alert('" + message + "');window.location.href = 'Inicio.aspx';</script>");
+            }
+        }
+
+        protected void Calendario_DayRender(object sender, DayRenderEventArgs e)
+        {
+            List<WebAppIntranetConsultaEventos_Result> eventos = logica.ConsultaEventos(DateTime.Today,0, 2,0);
+            foreach (var item in eventos)
+            {
+                if (e.Day.Date.CompareTo(item.fecha_ini.Date)>= 0 && e.Day.Date.CompareTo(item.fecha_fin.Date)<=0)
+                {
+                    if (!e.Day.Date.Equals(Calendario.SelectedDate))
+                    {
+                        if (e.Day.IsOtherMonth)
+                        {
+                            e.Cell.BackColor = Color.DarkSeaGreen;
+                        }
+                        else
+                        {
+                            e.Cell.BackColor = Color.DarkGreen;
+                            e.Cell.ForeColor = Color.White;
+                        }
+                    }
+                }
+            }
+        }
+
+        protected void Calendario_SelectionChanged(object sender, EventArgs e)
+        {
+            if (Calendario.SelectedDate.Month!=Calendario.VisibleDate.Month)
+            {
+                Calendario.VisibleDate = Calendario.SelectedDate;          
+            }
+            List<WebAppIntranetConsultaEventos_Result> eventos = logica.ConsultaEventos(Calendario.SelectedDate,0, 3,0);
+            if (eventos.Count == 1)
+            {
+                lblTituloEvento.Text = eventos.FirstOrDefault().titulo;
+                lblFechaInicio.Text = eventos.FirstOrDefault().fecha_ini.Date.ToString();
+                lblFechaFin.Text = eventos.FirstOrDefault().fecha_fin.Date.ToString();
+                lblTextoEvento.Text = eventos.FirstOrDefault().texto;
+                lblNumFolEvento.Text = eventos.FirstOrDefault().num_fol.ToString();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "MuestraEvento();", true);
+                Calendario.SelectedDates.Remove(Calendario.SelectedDate);
+            }
+            else if (eventos.Count>1)
+            {
+                lblSeleccionaEventoDia.Text = Calendario.SelectedDate.Date.ToString("D");
+                ListaEventos.DataSource = eventos;
+                ListaEventos.DataBind();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "SeleccionaEvento();", true);
+                Calendario.SelectedDates.Remove(Calendario.SelectedDate);
+            }
+            else
+            {
+                Calendario.SelectedDates.Remove(Calendario.SelectedDate);
+                Response.Write("<script type=\"text/javascript\">alert('No hay eventos')</script>");
+            }
+        }
+
+        protected void btnEventos_Click(object sender, EventArgs e)
+        {
+            Button lnk = sender as Button;
+            string folio = lnk.Attributes["CustomParameter"].ToString();
+            WebAppIntranetConsultaEventos_Result evento = logica.ConsultaEventos(DateTime.Today.Date, Convert.ToInt32(folio), 4, 0).FirstOrDefault();
+            lblTituloEvento.Text = evento.titulo;
+            lblFechaInicio.Text = evento.fecha_ini.Date.ToString();
+            lblFechaFin.Text = evento.fecha_fin.Date.ToString();
+            lblTextoEvento.Text = evento.texto;
+            lblNumFolEvento.Text = folio;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "MuestraEvento();", true);
+        }
+
+        protected void btnEditarEvento_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/Editar_Evento.aspx?fol=" + lblNumFolEvento.Text);
+        }
+
+        protected void btnNuevoEvento_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string titulo = txtNuevoTituloEvento.Text;
+                string texto = txtNuevoTextoEvento.Text;
+                DateTime fecha_ini = Convert.ToDateTime(txtNuevaFechaIniEvento.Text);
+                DateTime fecha_fin = Convert.ToDateTime(txtNuevaFechaFinEvento.Text);
+                WebAppIntranetAdmEventos_Result resultado = logica.AdminAnuncios(0, titulo, texto, DateTime.Today.Date, "LNC", fecha_ini, fecha_fin, 0, 1);
+                if (resultado.error == 0)
+                {
+                    txtNuevoTituloEvento.Text = txtNuevoTextoEvento.Text = txtNuevaFechaFinEvento.Text = txtNuevaFechaIniEvento.Text = "";
                     Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
                 }
                 else

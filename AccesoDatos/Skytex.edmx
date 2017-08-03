@@ -6,24 +6,6 @@
     <edmx:StorageModels>
     <Schema Namespace="developModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Develop.dbo.Intranet_Anuncios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Intranet_Anuncios">
-          <Key>
-            <PropertyRef Name="num_fol" />
-            
-            
-            
-            
-            
-          </Key>
-          <Property Name="num_fol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="titulo" Type="nvarchar" MaxLength="120" Nullable="false" />
-          <Property Name="texto" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="fecha" Type="datetime" Nullable="false" />
-          <Property Name="autor" Type="nchar" MaxLength="3" Nullable="false" />
-          <Property Name="fecha_fin" Type="datetime" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
 warning 6002: The table/view 'Develop.dbo.Intranet_noticias' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Intranet_noticias">
           <Key>
@@ -42,28 +24,15 @@ warning 6002: The table/view 'Develop.dbo.Intranet_noticias' does not have a pri
           <Property Name="imagenUrl" Type="nvarchar" MaxLength="120" />
           <Property Name="autor" Type="nchar" MaxLength="3" Nullable="false" />
         </EntityType>
-        <Function Name="sp_WebAppIntranetConsultaAnuncios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="num_fol" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_WebAppIntranetConsultaEventos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="fecha_consulta" Type="datetime" Mode="In" />
-          <Parameter Name="tipo" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_WebAppIntranetInsertaNoticia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="titulo" Type="nvarchar" Mode="In" />
-          <Parameter Name="noticia" Type="varchar(max)" Mode="In" />
-          <Parameter Name="resumen" Type="nvarchar" Mode="In" />
-          <Parameter Name="fecha" Type="datetime" Mode="In" />
-          <Parameter Name="imagenUrl" Type="nvarchar" Mode="In" />
-          <Parameter Name="autor" Type="nchar" Mode="In" />
-        </Function>
-        <Function Name="WebAppIntranetAdmAnuncios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="WebAppIntranetAdmEventos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="num_fol" Type="int" Mode="In" />
           <Parameter Name="titulo" Type="nvarchar" Mode="In" />
           <Parameter Name="texto" Type="nvarchar" Mode="In" />
-          <Parameter Name="fecha" Type="datetime" Mode="In" />
+          <Parameter Name="fecha_publi" Type="datetime" Mode="In" />
           <Parameter Name="autor" Type="nchar" Mode="In" />
+          <Parameter Name="fecha_ini" Type="datetime" Mode="In" />
           <Parameter Name="fecha_fin" Type="datetime" Mode="In" />
+          <Parameter Name="sw_anuncio" Type="smallint" Mode="In" />
           <Parameter Name="opcion" Type="smallint" Mode="In" />
         </Function>
         <Function Name="WebAppIntranetAdmNoticia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -76,17 +45,17 @@ warning 6002: The table/view 'Develop.dbo.Intranet_noticias' does not have a pri
           <Parameter Name="autor" Type="nchar" Mode="In" />
           <Parameter Name="opcion" Type="smallint" Mode="In" />
         </Function>
+        <Function Name="WebAppIntranetBirthday" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fecha_consulta" Type="datetime" Mode="In" />
+          <Parameter Name="tipo" Type="smallint" Mode="In" />
+        </Function>
+        <Function Name="WebAppIntranetConsultaEventos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fecha_consulta" Type="datetime" Mode="In" />
+          <Parameter Name="num_fol" Type="int" Mode="In" />
+          <Parameter Name="tipo" Type="int" Mode="In" />
+          <Parameter Name="sw_anuncio" Type="smallint" Mode="In" />
+        </Function>
         <EntityContainer Name="developModelStoreContainer">
-          <EntitySet Name="Intranet_Anuncios" EntityType="Self.Intranet_Anuncios" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Intranet_Anuncios].[num_fol] AS [num_fol], 
-    [Intranet_Anuncios].[titulo] AS [titulo], 
-    [Intranet_Anuncios].[texto] AS [texto], 
-    [Intranet_Anuncios].[fecha] AS [fecha], 
-    [Intranet_Anuncios].[autor] AS [autor], 
-    [Intranet_Anuncios].[fecha_fin] AS [fecha_fin]
-    FROM [dbo].[Intranet_Anuncios] AS [Intranet_Anuncios]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="Intranet_noticias" EntityType="Self.Intranet_noticias" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Intranet_noticias].[num_folio] AS [num_folio], 
@@ -104,32 +73,7 @@ warning 6002: The table/view 'Develop.dbo.Intranet_noticias' does not have a pri
     <edmx:ConceptualModels>
       <Schema Namespace="developModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="developEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Intranet_Anuncios" EntityType="developModel.Intranet_Anuncios" />
           <EntitySet Name="Intranet_noticias" EntityType="developModel.Intranet_noticias" />
-          <FunctionImport Name="sp_WebAppIntranetConsultaEventos" ReturnType="Collection(developModel.sp_WebAppIntranetConsultaEventos_Result)">
-            <Parameter Name="fecha_consulta" Mode="In" Type="DateTime" />
-            <Parameter Name="tipo" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_WebAppIntranetInsertaNoticia" ReturnType="Collection(developModel.sp_WebAppIntranetInsertaNoticia_Result)">
-            <Parameter Name="titulo" Mode="In" Type="String" />
-            <Parameter Name="noticia" Mode="In" Type="String" />
-            <Parameter Name="resumen" Mode="In" Type="String" />
-            <Parameter Name="fecha" Mode="In" Type="DateTime" />
-            <Parameter Name="imagenUrl" Mode="In" Type="String" />
-            <Parameter Name="autor" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="WebAppIntranetAdmAnuncios" ReturnType="Collection(developModel.WebAppIntranetAdmAnuncios_Result)">
-            <Parameter Name="num_fol" Mode="In" Type="Int32" />
-            <Parameter Name="titulo" Mode="In" Type="String" />
-            <Parameter Name="texto" Mode="In" Type="String" />
-            <Parameter Name="fecha" Mode="In" Type="DateTime" />
-            <Parameter Name="autor" Mode="In" Type="String" />
-            <Parameter Name="fecha_fin" Mode="In" Type="DateTime" />
-            <Parameter Name="opcion" Mode="In" Type="Int16" />
-          </FunctionImport>
-          <FunctionImport Name="sp_WebAppIntranetConsultaAnuncios" ReturnType="Collection(developModel.sp_WebAppIntranetConsultaAnuncios_Result)">
-          <Parameter Name="num_fol" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="WebAppIntranetAdmNoticia" ReturnType="Collection(developModel.WebAppIntranetAdmNoticia_Result)">
             <Parameter Name="num_fol" Mode="In" Type="Int32" />
             <Parameter Name="titulo" Mode="In" Type="String" />
@@ -140,18 +84,28 @@ warning 6002: The table/view 'Develop.dbo.Intranet_noticias' does not have a pri
             <Parameter Name="autor" Mode="In" Type="String" />
             <Parameter Name="opcion" Mode="In" Type="Int16" />
           </FunctionImport>
+          <FunctionImport Name="WebAppIntranetConsultaEventos" ReturnType="Collection(developModel.WebAppIntranetConsultaEventos_Result)">
+            <Parameter Name="fecha_consulta" Mode="In" Type="DateTime" />
+            <Parameter Name="num_fol" Mode="In" Type="Int32" />
+            <Parameter Name="tipo" Mode="In" Type="Int32" />
+            <Parameter Name="sw_anuncio" Mode="In" Type="Int16" />
+          </FunctionImport>
+          <FunctionImport Name="WebAppIntranetAdmEventos" ReturnType="Collection(developModel.WebAppIntranetAdmEventos_Result)">
+            <Parameter Name="num_fol" Mode="In" Type="Int32" />
+            <Parameter Name="titulo" Mode="In" Type="String" />
+            <Parameter Name="texto" Mode="In" Type="String" />
+            <Parameter Name="fecha_publi" Mode="In" Type="DateTime" />
+            <Parameter Name="autor" Mode="In" Type="String" />
+            <Parameter Name="fecha_ini" Mode="In" Type="DateTime" />
+            <Parameter Name="fecha_fin" Mode="In" Type="DateTime" />
+            <Parameter Name="sw_anuncio" Mode="In" Type="Int16" />
+            <Parameter Name="opcion" Mode="In" Type="Int16" />
+          </FunctionImport>
+          <FunctionImport Name="WebAppIntranetBirthday" ReturnType="Collection(developModel.WebAppIntranetBirthday_Result)">
+            <Parameter Name="fecha_consulta" Mode="In" Type="DateTime" />
+            <Parameter Name="tipo" Mode="In" Type="Int16" />
+          </FunctionImport>
         </EntityContainer>
-        <EntityType Name="Intranet_Anuncios">
-          <Key>
-            <PropertyRef Name="num_fol" />
-          </Key>
-          <Property Name="num_fol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="titulo" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="true" />
-          <Property Name="texto" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="autor" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="fecha_fin" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
         <EntityType Name="Intranet_noticias">
           <Key>
             <PropertyRef Name="num_folio" />
@@ -164,32 +118,30 @@ warning 6002: The table/view 'Develop.dbo.Intranet_noticias' does not have a pri
           <Property Name="imagenUrl" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
           <Property Name="autor" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
         </EntityType>
-        <ComplexType Name="sp_WebAppIntranetConsultaEventos_Result">
-          <Property Type="Int32" Name="num_fol" Nullable="false" />
-          <Property Type="String" Name="nombre" Nullable="false" MaxLength="120" />
-          <Property Type="DateTime" Name="fecha_ini" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="fecha_fin" Nullable="false" Precision="23" />
-          <Property Type="String" Name="autor" Nullable="false" MaxLength="3" />
-        </ComplexType>
-        <ComplexType Name="sp_WebAppIntranetInsertaNoticia_Result">
-          <Property Type="Int16" Name="error" Nullable="true" />
-          <Property Type="String" Name="mensaje" Nullable="true" MaxLength="25" />
-        </ComplexType>
-        <ComplexType Name="WebAppIntranetAdmAnuncios_Result">
-          <Property Type="Int16" Name="error" Nullable="true" />
-          <Property Type="String" Name="mensaje" Nullable="true" MaxLength="25" />
-        </ComplexType>
-        <ComplexType Name="sp_WebAppIntranetConsultaAnuncios_Result">
-          <Property Type="Int32" Name="num_fol" Nullable="false" />
-          <Property Type="String" Name="titulo" Nullable="false" MaxLength="120" />
-          <Property Type="String" Name="texto" Nullable="false" MaxLength="255" />
-          <Property Type="DateTime" Name="fecha" Nullable="false" Precision="23" />
-          <Property Type="String" Name="autor" Nullable="false" MaxLength="3" />
-          <Property Type="DateTime" Name="fecha_fin" Nullable="false" Precision="23" />
-        </ComplexType>
         <ComplexType Name="WebAppIntranetAdmNoticia_Result">
           <Property Type="Int16" Name="error" Nullable="true" />
           <Property Type="String" Name="mensaje" Nullable="true" MaxLength="40" />
+        </ComplexType>
+        <ComplexType Name="WebAppIntranetConsultaEventos_Result">
+          <Property Type="Int32" Name="num_fol" Nullable="false" />
+          <Property Type="String" Name="titulo" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="texto" Nullable="false" />
+          <Property Type="DateTime" Name="fecha_publi" Nullable="false" Precision="23" />
+          <Property Type="String" Name="autor" Nullable="false" MaxLength="3" />
+          <Property Type="DateTime" Name="fecha_ini" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="fecha_fin" Nullable="false" Precision="23" />
+          <Property Type="Int16" Name="sw_anuncio" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="WebAppIntranetAdmEventos_Result">
+          <Property Type="Int16" Name="error" Nullable="true" />
+          <Property Type="String" Name="mensaje" Nullable="true" MaxLength="25" />
+        </ComplexType>
+        <ComplexType Name="WebAppIntranetBirthday_Result">
+          <Property Type="Int64" Name="num" Nullable="true" />
+          <Property Type="DateTime" Name="birthday" Nullable="true" />
+          <Property Type="String" Name="user_cve" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="puesto" Nullable="false" MaxLength="25" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -197,18 +149,6 @@ warning 6002: The table/view 'Develop.dbo.Intranet_noticias' does not have a pri
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="developModelStoreContainer" CdmEntityContainer="developEntities">
-          <EntitySetMapping Name="Intranet_Anuncios">
-            <EntityTypeMapping TypeName="developModel.Intranet_Anuncios">
-              <MappingFragment StoreEntitySet="Intranet_Anuncios">
-                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
-                <ScalarProperty Name="autor" ColumnName="autor" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="texto" ColumnName="texto" />
-                <ScalarProperty Name="titulo" ColumnName="titulo" />
-                <ScalarProperty Name="num_fol" ColumnName="num_fol" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Intranet_noticias">
             <EntityTypeMapping TypeName="developModel.Intranet_noticias">
               <MappingFragment StoreEntitySet="Intranet_noticias">
@@ -222,50 +162,44 @@ warning 6002: The table/view 'Develop.dbo.Intranet_noticias' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_WebAppIntranetConsultaEventos" FunctionName="developModel.Store.sp_WebAppIntranetConsultaEventos">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="developModel.sp_WebAppIntranetConsultaEventos_Result">
-                <ScalarProperty Name="num_fol" ColumnName="num_fol" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="fecha_ini" ColumnName="fecha_ini" />
-                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
-                <ScalarProperty Name="autor" ColumnName="autor" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_WebAppIntranetInsertaNoticia" FunctionName="developModel.Store.sp_WebAppIntranetInsertaNoticia">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="developModel.sp_WebAppIntranetInsertaNoticia_Result">
-                <ScalarProperty Name="error" ColumnName="error" />
-                <ScalarProperty Name="mensaje" ColumnName="mensaje" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="WebAppIntranetAdmAnuncios" FunctionName="developModel.Store.WebAppIntranetAdmAnuncios">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="developModel.WebAppIntranetAdmAnuncios_Result">
-                <ScalarProperty Name="error" ColumnName="error" />
-                <ScalarProperty Name="mensaje" ColumnName="mensaje" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_WebAppIntranetConsultaAnuncios" FunctionName="developModel.Store.sp_WebAppIntranetConsultaAnuncios">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="developModel.sp_WebAppIntranetConsultaAnuncios_Result">
-                <ScalarProperty Name="num_fol" ColumnName="num_fol" />
-                <ScalarProperty Name="titulo" ColumnName="titulo" />
-                <ScalarProperty Name="texto" ColumnName="texto" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="autor" ColumnName="autor" />
-                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="WebAppIntranetAdmNoticia" FunctionName="developModel.Store.WebAppIntranetAdmNoticia">
             <ResultMapping>
               <ComplexTypeMapping TypeName="developModel.WebAppIntranetAdmNoticia_Result">
                 <ScalarProperty Name="error" ColumnName="error" />
                 <ScalarProperty Name="mensaje" ColumnName="mensaje" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="WebAppIntranetConsultaEventos" FunctionName="developModel.Store.WebAppIntranetConsultaEventos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="developModel.WebAppIntranetConsultaEventos_Result">
+                <ScalarProperty Name="num_fol" ColumnName="num_fol" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="texto" ColumnName="texto" />
+                <ScalarProperty Name="fecha_publi" ColumnName="fecha_publi" />
+                <ScalarProperty Name="autor" ColumnName="autor" />
+                <ScalarProperty Name="fecha_ini" ColumnName="fecha_ini" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+                <ScalarProperty Name="sw_anuncio" ColumnName="sw_anuncio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="WebAppIntranetAdmEventos" FunctionName="developModel.Store.WebAppIntranetAdmEventos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="developModel.WebAppIntranetAdmEventos_Result">
+                <ScalarProperty Name="error" ColumnName="error" />
+                <ScalarProperty Name="mensaje" ColumnName="mensaje" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="WebAppIntranetBirthday" FunctionName="developModel.Store.WebAppIntranetBirthday">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="developModel.WebAppIntranetBirthday_Result">
+                <ScalarProperty Name="num" ColumnName="num" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="user_cve" ColumnName="user_cve" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="puesto" ColumnName="puesto" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

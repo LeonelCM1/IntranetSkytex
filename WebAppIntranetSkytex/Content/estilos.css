@@ -1,7 +1,14 @@
-﻿
-img:not(.classy){
-  display: block;
-  height: auto;
-  max-width: 100%;
-  page-break-inside: avoid;
+﻿.liston{
+    background-image:url("/../Media/Liston.png");
+    background-repeat:no-repeat;
+    background-size:100%;
+}
+.letra{
+    font-size:2vw;
+    text-align: center;
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
 }

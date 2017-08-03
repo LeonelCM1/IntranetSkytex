@@ -11,12 +11,12 @@ namespace Entidades
 {
     using System;
     
-    public partial class sp_WebAppIntranetConsultaEventos_Result
+    public partial class WebAppIntranetBirthday_Result
     {
-        public int num_fol { get; set; }
+        public Nullable<long> num { get; set; }
+        public Nullable<System.DateTime> birthday { get; set; }
+        public string user_cve { get; set; }
         public string nombre { get; set; }
-        public System.DateTime fecha_ini { get; set; }
-        public System.DateTime fecha_fin { get; set; }
-        public string autor { get; set; }
+        public string puesto { get; set; }
     }
 }

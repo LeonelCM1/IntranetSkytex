@@ -2,6 +2,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link type="text/css" rel="stylesheet" href="<%=ResolveUrl("~/Content/estilos.css")%>" />
     <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="Inicio.aspx">Noticias</a></li>
+            <li class="active"><%= lblTitulo.Text %></li>
+        </ol>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="row">

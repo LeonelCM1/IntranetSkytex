@@ -46,9 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Intranet_Anuncios.cs">
-      <DependentUpon>Skytex.tt</DependentUpon>
-    </Compile>
     <Compile Include="Intranet_noticias.cs">
       <DependentUpon>Skytex.tt</DependentUpon>
     </Compile>
@@ -63,19 +60,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Skytex.tt</DependentUpon>
     </Compile>
-    <Compile Include="sp_WebAppIntranetConsultaAnuncios_Result.cs">
-      <DependentUpon>Skytex.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_WebAppIntranetConsultaEventos_Result.cs">
-      <DependentUpon>Skytex.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_WebAppIntranetInsertaNoticia_Result.cs">
-      <DependentUpon>Skytex.tt</DependentUpon>
-    </Compile>
-    <Compile Include="WebAppIntranetAdmAnuncios_Result.cs">
+    <Compile Include="WebAppIntranetAdmEventos_Result.cs">
       <DependentUpon>Skytex.tt</DependentUpon>
     </Compile>
     <Compile Include="WebAppIntranetAdmNoticia_Result.cs">
+      <DependentUpon>Skytex.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WebAppIntranetBirthday_Result.cs">
+      <DependentUpon>Skytex.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WebAppIntranetConsultaEventos_Result.cs">
       <DependentUpon>Skytex.tt</DependentUpon>
     </Compile>
   </ItemGroup>

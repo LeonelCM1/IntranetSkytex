@@ -10,15 +10,10 @@
 namespace Entidades
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Intranet_Anuncios
+    public partial class WebAppIntranetAdmEventos_Result
     {
-        public int num_fol { get; set; }
-        public string titulo { get; set; }
-        public string texto { get; set; }
-        public System.DateTime fecha { get; set; }
-        public string autor { get; set; }
-        public System.DateTime fecha_fin { get; set; }
+        public Nullable<short> error { get; set; }
+        public string mensaje { get; set; }
     }
 }

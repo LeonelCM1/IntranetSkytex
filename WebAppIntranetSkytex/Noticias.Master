@@ -7,6 +7,7 @@
     <title>Intranet Skytex</title>
     <!-- Referencia a estilos en la carpeta Content -->
     <link type="text/css" rel="stylesheet" href="<%=ResolveUrl("~/Content/bootstrap.css")%>" />
+    <link type="text/css" rel="stylesheet" href="<%=ResolveUrl("~/Content/estilos.css") %>" />
     <!-- Icono de la aplicacion web -->
     <link rel="shortcut icon" href="<%=ResolveUrl("~/Media/skytex.ico") %>" />
     <!-- Referencia de archivos JavaScript en la carpeta Scripts -->
@@ -33,6 +34,7 @@
             <form class="navbar-form navbar-left">
             </form>
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="Cumpleañeros.aspx"><span class="glyphicon glyphicon-gift"></span> Cumpleañeros</a></li>
                 <li><a href="AgregarNoticia.aspx">Agregar Noticia</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cuenta <span class="caret"></span></a>

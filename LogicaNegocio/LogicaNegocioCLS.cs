@@ -19,29 +19,29 @@ namespace LogicaNegocio
         {
             return (datos.ConsultaNoticias());
         }
-        public List<sp_WebAppIntranetConsultaAnuncios_Result> ConsultaAnuncios(int fol)
+        public List<WebAppIntranetConsultaEventos_Result> ConsultaAnuncios()
         {
-            return (datos.ConsultaAnuncios(fol));
+            return (datos.ConsultaAnuncios());
         }
-        public List<sp_WebAppIntranetConsultaEventos_Result> ConsultaEventos(DateTime fecha, int tipo)
+        public List<WebAppIntranetConsultaEventos_Result> ConsultaEventos(DateTime fecha,int folio, int tipo, short sw_anuncio)
         {
-            return (datos.ConsultaEventos(fecha,tipo));
+            return (datos.ConsultaEventos(fecha,folio,tipo,sw_anuncio));
         }
         public Intranet_noticias ConsultaNoticiaPorFolio(int folio)
         {
             return (datos.ConsultaNoticiaPorFolio(folio));
         }
-        public sp_WebAppIntranetConsultaAnuncios_Result AnuncioPorFolio(int folio)
+        public WebAppIntranetAdmEventos_Result AdminAnuncios(int num_fol, string titulo, string texto, DateTime fecha, string autor, DateTime fecha_ini, DateTime fecha_fin, short sw_anuncio, short opcion)
         {
-            return (datos.AnuncioPorFolio(folio));
-        }
-        public WebAppIntranetAdmAnuncios_Result AdminAnuncios(int num_fol, string titulo, string texto, DateTime fecha, string autor, DateTime fecha_fin, short opcion)
-        {
-            return (datos.AdminAnuncios(num_fol, titulo, texto, fecha, autor, fecha_fin, opcion));
+            return (datos.AdminAnuncios(num_fol, titulo, texto, fecha, autor, fecha_ini, fecha_fin, sw_anuncio, opcion));
         }
         public WebAppIntranetAdmNoticia_Result AdminNoticias(int num_fol, string titulo, string noticia, string resumen, DateTime fecha, string imagen, string autor, short opcion)
         {
             return (datos.AdminNoticias(num_fol, titulo, noticia, resumen, fecha, imagen, autor, opcion));
+        }
+        public List<WebAppIntranetBirthday_Result> cumpleanios(DateTime fecha, short tipo)
+        {
+            return (datos.cumpleanios(fecha, tipo));
         }
     }
 }
