@@ -23,7 +23,7 @@ namespace WebAppIntranetSkytex
             DataList2.DataSource = logica.cumpleanios(DateTime.Today.Date, 0);
             DataList2.DataBind();
         }
-        public string RutaImagen(string Nombre, string num)
+        public string RutaImagen(string Nombre, string num,int tipo)
         {
             string url = "";
             //Load the Image to be written on.
@@ -40,9 +40,18 @@ namespace WebAppIntranetSkytex
             graphicImage.DrawString(Nombre,
                new Font("Arial", 24, FontStyle.Bold),
                SystemBrushes.WindowText, rect1, sf);
-            //Save the new image to the response output stream.
-            bitMapImage.Save(Server.MapPath("~/Media/Cumpleanios"+num+".png"), ImageFormat.Png);
-            url = "~/Media/Cumpleanios" + num + ".png";
+            if (tipo==1)
+            {
+                //Save the new image to the response output stream.
+                bitMapImage.Save(Server.MapPath("~/Media/Cumpleanios" + num + "X.png"), ImageFormat.Png);
+                url = "~/Media/Cumpleanios" + num + "X.png";
+            }
+            else
+            {
+                //Save the new image to the response output stream.
+                bitMapImage.Save(Server.MapPath("~/Media/Cumpleanios" + num + ".png"), ImageFormat.Png);
+                url = "~/Media/Cumpleanios" + num + ".png";
+            }
             //Clean house.
             graphicImage.Dispose();
             bitMapImage.Dispose();

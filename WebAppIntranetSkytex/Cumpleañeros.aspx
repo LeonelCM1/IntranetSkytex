@@ -26,7 +26,7 @@
                     <div class="col-md-6 text-center">
                         <asp:DataList ID="DataList1" runat="server">
                             <ItemTemplate>
-                                <asp:Image ID="Liston" runat="server" ImageUrl='<%#RutaImagen(Eval("nombre").ToString(),Eval("num").ToString()) %>' Width="100%" />
+                                <asp:Image ID="Liston" runat="server" ImageUrl='<%#RutaImagen(Eval("nombre").ToString(),Eval("num").ToString(),1) %>' Width="100%" />
                             </ItemTemplate>
                         </asp:DataList>
                     </div>
@@ -39,7 +39,7 @@
                         <asp:DataList ID="DataList2" runat="server" RepeatColumns="4" RepeatDirection="Horizontal">
                             <ItemTemplate>
                                 <h4 class="text-center"><strong><%# fecha_cumple(Eval("birthday")) %></strong></h4>
-                                <asp:Image ID="ListonSemana" runat="server" ImageUrl='<%#RutaImagen(Eval("nombre").ToString(),Eval("num").ToString()) %>' Width="100%" />
+                                <asp:Image ID="ListonSemana" runat="server" ImageUrl='<%#RutaImagen(Eval("nombre").ToString(),Eval("num").ToString(),2) %>' Width="100%" />
                             </ItemTemplate>
                         </asp:DataList>
                     </div>

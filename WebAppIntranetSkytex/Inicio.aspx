@@ -130,7 +130,7 @@
           <h3><asp:Label ID="Label1" runat="server" Text="Label"></asp:Label></h3>
       </div>
       <div class="modal-body">
-          <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
+          <asp:TextBox ID="TextBox1" runat="server" TextMode="MultiLine" ReadOnly="true" BorderWidth="0" Width="100%" style="overflow:hidden; resize:none;"></asp:TextBox>
           <br /><br />
       </div>
       <div class="modal-footer">
@@ -307,7 +307,7 @@
         var texto = button.data('texto')
         var folio = button.data('folio')
         $('#<%=Label1.ClientID%>').text(titulo);
-        $('#<%=Label2.ClientID%>').text(texto);
+        $('#<%=TextBox1.ClientID%>').text(texto);
         $('#btnEditAnuncio').attr('href', '/Editar_Anuncio.aspx?fol='+folio);
     })
     function validar() {
