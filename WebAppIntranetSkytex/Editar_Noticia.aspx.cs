@@ -17,23 +17,30 @@ namespace WebAppIntranetSkytex
         int folio;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["n"]!=null)
+            if (Session["user_cve"] != null && (Convert.ToInt16(Session["rol"]) == 1 || Convert.ToInt16(Session["rol"]) == 2))
             {
-                folio = Convert.ToInt32(Request.QueryString["n"]);
-                if (!IsPostBack)
+                if (Request.QueryString["n"]!=null)
                 {
-                    Intranet_noticias noticia = logica.ConsultaNoticiaPorFolio(folio);
-                    if (noticia!=null)
+                    folio = Convert.ToInt32(Request.QueryString["n"]);
+                    if (!IsPostBack)
                     {
-                        txtTitulo.Text = noticia.titulo;
-                        txtResumen.Text = noticia.resumen;
-                        CKEditor1.Text = noticia.noticia;
-                        imagen = noticia.imagenUrl;
+                        Intranet_noticias noticia = logica.ConsultaNoticiaPorFolio(folio);
+                        if (noticia!=null)
+                        {
+                            txtTitulo.Text = noticia.titulo;
+                            txtResumen.Text = noticia.resumen;
+                            CKEditor1.Text = noticia.noticia;
+                            imagen = noticia.imagenUrl;
+                        }
+                        else
+                        {
+                            Response.Redirect("Inicio.aspx");
+                        }
                     }
-                    else
-                    {
-                        Response.Redirect("Inicio.aspx");
-                    }
+                }
+                else
+                {
+                    Response.Redirect("Inicio.aspx");
                 }
             }
             else
@@ -59,7 +66,7 @@ namespace WebAppIntranetSkytex
             string noticia = CKEditor1.Text;
             try
             {
-                WebAppIntranetAdmNoticia_Result resultado = logica.AdminNoticias(folio, titulo, noticia, resumen, DateTime.Today, imagen, "LNC", 2);
+                WebAppIntranetAdmNoticia_Result resultado = logica.AdminNoticias(folio, titulo, noticia, resumen, DateTime.Today, imagen, Session["user_cve"].ToString(), 2);
                 if (resultado.error==0)
                 {
                     Response.Write("<script type=\"text/javascript\">alert('Noticia Actualizada Correctamente');window.location.href = 'Inicio.aspx';</script>");
@@ -79,7 +86,7 @@ namespace WebAppIntranetSkytex
         {
             try
             {
-                WebAppIntranetAdmNoticia_Result resultado = logica.AdminNoticias(folio, "", "", "", DateTime.Today, "", "LNC", 3);
+                WebAppIntranetAdmNoticia_Result resultado = logica.AdminNoticias(folio, "", "", "", DateTime.Today, "",Session["user_cve"].ToString(), 3);
                 if (resultado.error==0)
                 {
                     Response.Write("<script type=\"text/javascript\">alert('Noticia Eliminada Correctamente');window.location.href = 'Inicio.aspx';</script>");

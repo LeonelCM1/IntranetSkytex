@@ -13,7 +13,10 @@
                         </ItemTemplate>
                     </asp:DataList>
                 </div>
-                <a href="#" data-toggle="modal" data-target="#NuevoAnuncio"><span aria-hidden="true" class="glyphicon glyphicon-plus"></span> Nuevo Anuncio</a>
+                <% if (Convert.ToInt16(Session["rol"]) == 1 || Convert.ToInt16(Session["rol"]) == 2)
+                   { %>
+                    <a href="#" data-toggle="modal" data-target="#NuevoAnuncio"><span aria-hidden="true" class="glyphicon glyphicon-plus"></span> Nuevo Anuncio</a>
+                <%} %>
             </div>
         </div>
         <div class="panel panel-default">
@@ -40,7 +43,10 @@
                         <ItemStyle CssClass="list-group-item"/>
                     </asp:DataList>
                 </div>
-                <a href="#" data-toggle="modal" data-target="#NuevoEvento"><span aria-hidden="true" class="glyphicon glyphicon-plus"></span> Nuevo Evento</a>
+                <% if (Convert.ToInt16(Session["rol"]) == 1 || Convert.ToInt16(Session["rol"]) == 2)
+                   { %>
+                    <a href="#" data-toggle="modal" data-target="#NuevoEvento"><span aria-hidden="true" class="glyphicon glyphicon-plus"></span> Nuevo Evento</a>
+                <%} %>
             </div>
         </div>
     </div>
@@ -57,7 +63,7 @@
         </div>
                     
         <div class="content-fluid" style="margin-top:-4%;">
-            <asp:GridView ID="GridNoticias" runat="server" AutoGenerateColumns="false" BorderStyle="None" GridLines="None" CssClass="list-group" Width="100%">
+            <asp:GridView ID="GridNoticias" runat="server" AutoGenerateColumns="false" BorderStyle="None" GridLines="None" CssClass="list-group" Width="100%" AllowPaging="true" OnPageIndexChanging="GridNoticias_PageIndexChanging" PageSize="4">
                 <Columns>
                     <asp:TemplateField>
                         <ItemTemplate>
@@ -117,6 +123,7 @@
                         <ItemStyle BorderStyle="none"/>
                     </asp:TemplateField>
                 </Columns>
+                <PagerStyle CssClass = "pagination-ys" />
             </asp:GridView>
         </div>
     </div>
@@ -130,14 +137,16 @@
           <h3><asp:Label ID="Label1" runat="server" Text="Label"></asp:Label></h3>
       </div>
       <div class="modal-body">
-          <asp:TextBox ID="TextBox1" runat="server" TextMode="MultiLine" ReadOnly="true" BorderWidth="0" Width="100%" style="overflow:hidden; resize:none;"></asp:TextBox>
+                <asp:Label ID="Label2" runat="server"></asp:Label>
           <br /><br />
       </div>
+    <% if (Convert.ToInt16(Session["rol"]) == 1 || Convert.ToInt16(Session["rol"]) == 2){ %>                   
       <div class="modal-footer">
           <div style="text-align:right;">
             <a id="btnEditAnuncio" class="btn btn-info" href="#" role="button">Editar Anuncio</a>
           </div>
       </div>
+    <%} %>
     </div>
   </div>
 </div>
@@ -170,9 +179,14 @@
           </div>
           <br />
           <div class="row">
-              <div class="col-md-2"></div>
-              <div class="col-md-3">
-                  <h4>Fecha de fin:</h4>
+              <div class="col-md-2" style="text-align:right;">
+                  <h4>Inicio:</h4>
+              </div>
+              <div class="col-md-4">
+                  <asp:TextBox ID="txtNuevaFechaInicio" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+              </div>
+              <div class="col-md-2" style="text-align:right;">
+                  <h4>Fin:</h4>
               </div>
               <div class="col-md-4">
                   <asp:TextBox ID="txtNuevaFechaFin" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
@@ -231,10 +245,12 @@
       <div class="modal-body">
           <asp:Label ID="lblTextoEvento" runat="server" Text="Label"></asp:Label>
       </div>
+    <% if (Convert.ToInt16(Session["rol"]) == 1 || Convert.ToInt16(Session["rol"]) == 2){ %>
       <div class="modal-footer text-center">
           <asp:Label ID="lblNumFolEvento" runat="server" Text="Label" style="display:none"></asp:Label>
           <asp:Button ID="btnEditarEvento" runat="server" Text="Editar Evento" CssClass="btn btn-info" OnClick="btnEditarEvento_Click" />
       </div>
+    <%} %>
     </div>
   </div>
 </div>
@@ -307,7 +323,7 @@
         var texto = button.data('texto')
         var folio = button.data('folio')
         $('#<%=Label1.ClientID%>').text(titulo);
-        $('#<%=TextBox1.ClientID%>').text(texto);
+        $('#<%=Label2.ClientID%>').html(texto);
         $('#btnEditAnuncio').attr('href', '/Editar_Anuncio.aspx?fol='+folio);
     })
     function validar() {
@@ -318,6 +334,9 @@
             alert('Completar todos los campos');
             return false;
         } else if ($('#<%=txtNuevaFechaFin.ClientID%>').val() === '') {
+            alert('Completar todos los campos');
+            return false;
+        } else if ($('#<%=txtNuevaFechaInicio.ClientID%>').val() === '') {
             alert('Completar todos los campos');
             return false;
         } else {

@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="a3baff9b568f4462a309222cf4e6b5fd" Name="Diagram1">
         <EntityTypeShape EntityType="developModel.Intranet_noticias" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="developModel.xcuser" Width="1.5" PointX="5.25" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

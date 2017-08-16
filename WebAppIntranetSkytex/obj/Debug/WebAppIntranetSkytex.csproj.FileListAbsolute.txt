@@ -29,6 +29,7 @@ C:\Projects\WebAppIntranetSkytex\WebAppIntranetSkytex\bin\AccesoDatos.pdb
 C:\Projects\WebAppIntranetSkytex\WebAppIntranetSkytex\bin\EntityFramework.xml
 C:\Projects\WebAppIntranetSkytex\WebAppIntranetSkytex\bin\EntityFramework.SqlServer.dll
 C:\Projects\WebAppIntranetSkytex\WebAppIntranetSkytex\bin\EntityFramework.SqlServer.xml
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\obj\Debug\WebAppIntranetSkytex.csprojResolveAssemblyReference.cache
 C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\bin\WebAppIntranetSkytex.dll.config
 C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\bin\WebAppIntranetSkytex.dll
 C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\bin\WebAppIntranetSkytex.pdb
@@ -58,6 +59,5 @@ C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\
 C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\bin\Newtonsoft.Json.xml
 C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\bin\Microsoft.AspNet.FriendlyUrls.xml
 C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\bin\AccesoDatos.pdb
-C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\obj\Debug\WebAppIntranetSkytex.csprojResolveAssemblyReference.cache
 C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\obj\Debug\WebAppIntranetSkytex.dll
 C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\WebAppIntranetSkytex\obj\Debug\WebAppIntranetSkytex.pdb

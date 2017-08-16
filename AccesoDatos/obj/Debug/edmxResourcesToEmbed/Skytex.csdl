@@ -18,6 +18,39 @@
       <Parameter Name="tipo" Mode="In" Type="Int32" />
       <Parameter Name="sw_anuncio" Mode="In" Type="Int16" />
     </FunctionImport>
+    <FunctionImport Name="WebAppIntranetBirthday" ReturnType="Collection(developModel.WebAppIntranetBirthday_Result)">
+      <Parameter Name="fecha_consulta" Mode="In" Type="DateTime" />
+      <Parameter Name="tipo" Mode="In" Type="Int16" />
+    </FunctionImport>
+    <FunctionImport Name="WebAppIntranetConsultaComentarios" ReturnType="Collection(developModel.WebAppIntranetConsultaComentarios_Result)">
+      <Parameter Name="num_fol" Mode="In" Type="Int32" />
+      <Parameter Name="num_folp" Mode="In" Type="Int32" />
+      <Parameter Name="opcion" Mode="In" Type="Int16" />
+    </FunctionImport>
+    <EntitySet Name="xcuser" EntityType="developModel.xcuser" />
+    <FunctionImport Name="WebAppIntranetConsultaUsuarios" ReturnType="Collection(developModel.WebAppIntranetConsultaUsuarios_Result)">
+      <Parameter Name="user_cve" Mode="In" Type="String" />
+      <Parameter Name="tipo" Mode="In" Type="Int16" />
+    </FunctionImport>
+    <FunctionImport Name="WebAppIntranetAdmUsuarios" ReturnType="Collection(developModel.WebAppIntranetAdmUsuarios_Result)">
+      <Parameter Name="user_cve" Mode="In" Type="String" />
+      <Parameter Name="rol" Mode="In" Type="Int16" />
+      <Parameter Name="app" Mode="In" Type="String" />
+      <Parameter Name="sw_visible" Mode="In" Type="Int16" />
+      <Parameter Name="tipo" Mode="In" Type="Int16" />
+    </FunctionImport>
+    <FunctionImport Name="WebAppIntranetConsultaApps" ReturnType="Collection(developModel.WebAppIntranetConsultaApps_Result)">
+      <Parameter Name="tipo" Mode="In" Type="Int16" />
+    </FunctionImport>
+    <FunctionImport Name="WebAppIntranetAdmComentarios" ReturnType="Collection(developModel.WebAppIntranetAdmComentarios_Result)">
+      <Parameter Name="num_fol" Mode="In" Type="Int32" />
+      <Parameter Name="comentario" Mode="In" Type="String" />
+      <Parameter Name="user_cve" Mode="In" Type="String" />
+      <Parameter Name="fecha_publi" Mode="In" Type="DateTime" />
+      <Parameter Name="sw_visible" Mode="In" Type="Int16" />
+      <Parameter Name="num_folp" Mode="In" Type="Int32" />
+      <Parameter Name="opcion" Mode="In" Type="Int16" />
+    </FunctionImport>
     <FunctionImport Name="WebAppIntranetAdmEventos" ReturnType="Collection(developModel.WebAppIntranetAdmEventos_Result)">
       <Parameter Name="num_fol" Mode="In" Type="Int32" />
       <Parameter Name="titulo" Mode="In" Type="String" />
@@ -28,10 +61,6 @@
       <Parameter Name="fecha_fin" Mode="In" Type="DateTime" />
       <Parameter Name="sw_anuncio" Mode="In" Type="Int16" />
       <Parameter Name="opcion" Mode="In" Type="Int16" />
-    </FunctionImport>
-    <FunctionImport Name="WebAppIntranetBirthday" ReturnType="Collection(developModel.WebAppIntranetBirthday_Result)">
-      <Parameter Name="fecha_consulta" Mode="In" Type="DateTime" />
-      <Parameter Name="tipo" Mode="In" Type="Int16" />
     </FunctionImport>
   </EntityContainer>
   <EntityType Name="Intranet_noticias">
@@ -60,15 +89,60 @@
     <Property Type="DateTime" Name="fecha_fin" Nullable="false" Precision="23" />
     <Property Type="Int16" Name="sw_anuncio" Nullable="false" />
   </ComplexType>
-  <ComplexType Name="WebAppIntranetAdmEventos_Result">
-    <Property Type="Int16" Name="error" Nullable="true" />
-    <Property Type="String" Name="mensaje" Nullable="true" MaxLength="25" />
-  </ComplexType>
   <ComplexType Name="WebAppIntranetBirthday_Result">
     <Property Type="Int64" Name="num" Nullable="true" />
     <Property Type="DateTime" Name="birthday" Nullable="true" />
     <Property Type="String" Name="user_cve" Nullable="false" MaxLength="25" />
     <Property Type="String" Name="nombre" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="puesto" Nullable="false" MaxLength="25" />
+  </ComplexType>
+  <ComplexType Name="WebAppIntranetConsultaComentarios_Result">
+    <Property Type="Int32" Name="num_fol" Nullable="false" />
+    <Property Type="String" Name="comentario" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="user_cve" Nullable="false" MaxLength="3" />
+    <Property Type="DateTime" Name="fecha_publi" Nullable="false" Precision="23" />
+    <Property Type="Int16" Name="sw_visible" Nullable="false" />
+    <Property Type="Int32" Name="num_folp" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="xcuser">
+    <Key>
+      <PropertyRef Name="ef_cve" />
+      <PropertyRef Name="user_cve" />
+    </Key>
+    <Property Name="ef_cve" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="div_cve" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="user_cve" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="nombre" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="dest_mail" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="idioma" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="srv_cve" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="path_adobe" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="Int16" />
+    <Property Name="sw_password" Type="Int16" />
+  </EntityType>
+  <ComplexType Name="WebAppIntranetConsultaUsuarios_Result">
+    <Property Type="String" Name="user_cve" Nullable="true" MaxLength="3" />
+    <Property Type="Int16" Name="rol" Nullable="true" />
+    <Property Type="String" Name="app" Nullable="true" MaxLength="50" />
+    <Property Type="Int16" Name="sw_activo" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="WebAppIntranetAdmUsuarios_Result">
+    <Property Type="Int16" Name="error" Nullable="true" />
+    <Property Type="String" Name="mensaje" Nullable="true" MaxLength="40" />
+  </ComplexType>
+  <ComplexType Name="WebAppIntranetConsultaApps_Result">
+    <Property Type="Int16" Name="folio" Nullable="false" />
+    <Property Type="String" Name="nombre" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="url" Nullable="false" MaxLength="50" />
+    <Property Type="Int16" Name="restriccion" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="WebAppIntranetAdmComentarios_Result">
+    <Property Type="Int16" Name="error" Nullable="true" />
+    <Property Type="String" Name="mensaje" Nullable="true" MaxLength="40" />
+  </ComplexType>
+  <ComplexType Name="WebAppIntranetAdmEventos_Result">
+    <Property Type="Int16" Name="error" Nullable="true" />
+    <Property Type="String" Name="mensaje" Nullable="true" MaxLength="25" />
   </ComplexType>
 </Schema>

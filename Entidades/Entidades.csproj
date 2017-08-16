@@ -60,16 +60,34 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Skytex.tt</DependentUpon>
     </Compile>
+    <Compile Include="WebAppIntranetAdmComentarios_Result.cs">
+      <DependentUpon>Skytex.tt</DependentUpon>
+    </Compile>
     <Compile Include="WebAppIntranetAdmEventos_Result.cs">
       <DependentUpon>Skytex.tt</DependentUpon>
     </Compile>
     <Compile Include="WebAppIntranetAdmNoticia_Result.cs">
       <DependentUpon>Skytex.tt</DependentUpon>
     </Compile>
+    <Compile Include="WebAppIntranetAdmUsuarios_Result.cs">
+      <DependentUpon>Skytex.tt</DependentUpon>
+    </Compile>
     <Compile Include="WebAppIntranetBirthday_Result.cs">
       <DependentUpon>Skytex.tt</DependentUpon>
     </Compile>
+    <Compile Include="WebAppIntranetConsultaApps_Result.cs">
+      <DependentUpon>Skytex.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WebAppIntranetConsultaComentarios_Result.cs">
+      <DependentUpon>Skytex.tt</DependentUpon>
+    </Compile>
     <Compile Include="WebAppIntranetConsultaEventos_Result.cs">
+      <DependentUpon>Skytex.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WebAppIntranetConsultaUsuarios_Result.cs">
+      <DependentUpon>Skytex.tt</DependentUpon>
+    </Compile>
+    <Compile Include="xcuser.cs">
       <DependentUpon>Skytex.tt</DependentUpon>
     </Compile>
   </ItemGroup>

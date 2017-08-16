@@ -34,11 +34,17 @@
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-2" style="text-align:right;">
-                        <h4><strong>Fecha final:</strong></h4>
+                        <h4><strong>Fecha Inicial:</strong></h4>
                         <br />
                     </div>
                     <div class="col-md-2">
-                        <asp:TextBox ID="txtFecha" runat="server" TextMode="Date" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="txtFechaIni" runat="server" TextMode="Date" CssClass="form-control"></asp:TextBox>
+                    </div>
+                    <div class="col-md-2">
+                        <h4><strong>Fecha final:</strong></h4>
+                    </div>
+                    <div class="col-md-2">
+                        <asp:TextBox ID="txtFechaFin" runat="server" TextMode="Date" CssClass="form-control"></asp:TextBox>
                         <br />
                     </div>
                 </div>
@@ -66,7 +72,10 @@
             } else if ($('#<%=txtAnuncio.ClientID%>').val() === '') {
                 alert('Completar todos los campos');
                 return false;
-            } else if ($('#<%=txtFecha.ClientID%>').val() === '') {
+            } else if ($('#<%=txtFechaIni.ClientID%>').val() === '') {
+                alert('Completar todos los campos');
+                return false;
+            } else if ($('#<%=txtFechaFin.ClientID%>').val() === '') {
                 alert('Completar todos los campos');
                 return false;
             } else {

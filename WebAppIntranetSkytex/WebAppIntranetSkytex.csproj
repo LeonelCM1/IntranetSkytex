@@ -111,6 +111,8 @@
     <Folder Include="Media\Mini\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Adm_Apps.aspx" />
+    <Content Include="Adm_Usuarios.aspx" />
     <Content Include="AgregarNoticia.aspx" />
     <Content Include="ckeditor\adapters\jquery.js" />
     <Content Include="ckeditor\build-config.js" />
@@ -421,6 +423,20 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adm_Apps.aspx.cs">
+      <DependentUpon>Adm_Apps.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adm_Apps.aspx.designer.cs">
+      <DependentUpon>Adm_Apps.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adm_Usuarios.aspx.cs">
+      <DependentUpon>Adm_Usuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adm_Usuarios.aspx.designer.cs">
+      <DependentUpon>Adm_Usuarios.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AgregarNoticia.aspx.cs">
       <DependentUpon>AgregarNoticia.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

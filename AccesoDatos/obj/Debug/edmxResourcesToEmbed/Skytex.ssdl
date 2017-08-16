@@ -14,6 +14,32 @@ warning 6002: The table/view 'Develop.dbo.Intranet_noticias' does not have a pri
     <Property Name="imagenUrl" Type="nvarchar" MaxLength="120" />
     <Property Name="autor" Type="nchar" MaxLength="3" Nullable="false" />
   </EntityType>
+  <EntityType Name="xcuser">
+    <Key>
+      <PropertyRef Name="ef_cve" />
+      <PropertyRef Name="user_cve" />
+    </Key>
+    <Property Name="ef_cve" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="div_cve" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="user_cve" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="dest_mail" Type="nvarchar" MaxLength="40" />
+    <Property Name="idioma" Type="nchar" MaxLength="3" />
+    <Property Name="srv_cve" Type="nvarchar" MaxLength="25" />
+    <Property Name="path_adobe" Type="nvarchar" MaxLength="255" />
+    <Property Name="status" Type="smallint" />
+    <Property Name="sw_password" Type="smallint" />
+  </EntityType>
+  <Function Name="WebAppIntranetAdmComentarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="num_fol" Type="int" Mode="In" />
+    <Parameter Name="comentario" Type="nvarchar" Mode="In" />
+    <Parameter Name="user_cve" Type="nchar" Mode="In" />
+    <Parameter Name="fecha_publi" Type="datetime" Mode="In" />
+    <Parameter Name="sw_visible" Type="smallint" Mode="In" />
+    <Parameter Name="num_folp" Type="int" Mode="In" />
+    <Parameter Name="opcion" Type="smallint" Mode="In" />
+  </Function>
   <Function Name="WebAppIntranetAdmEventos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="num_fol" Type="int" Mode="In" />
     <Parameter Name="titulo" Type="nvarchar" Mode="In" />
@@ -35,9 +61,24 @@ warning 6002: The table/view 'Develop.dbo.Intranet_noticias' does not have a pri
     <Parameter Name="autor" Type="nchar" Mode="In" />
     <Parameter Name="opcion" Type="smallint" Mode="In" />
   </Function>
+  <Function Name="WebAppIntranetAdmUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="user_cve" Type="nchar" Mode="In" />
+    <Parameter Name="rol" Type="smallint" Mode="In" />
+    <Parameter Name="app" Type="nvarchar" Mode="In" />
+    <Parameter Name="sw_visible" Type="smallint" Mode="In" />
+    <Parameter Name="tipo" Type="smallint" Mode="In" />
+  </Function>
   <Function Name="WebAppIntranetBirthday" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="fecha_consulta" Type="datetime" Mode="In" />
     <Parameter Name="tipo" Type="smallint" Mode="In" />
+  </Function>
+  <Function Name="WebAppIntranetConsultaApps" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="tipo" Type="smallint" Mode="In" />
+  </Function>
+  <Function Name="WebAppIntranetConsultaComentarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="num_fol" Type="int" Mode="In" />
+    <Parameter Name="num_folp" Type="int" Mode="In" />
+    <Parameter Name="opcion" Type="smallint" Mode="In" />
   </Function>
   <Function Name="WebAppIntranetConsultaEventos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="fecha_consulta" Type="datetime" Mode="In" />
@@ -45,7 +86,12 @@ warning 6002: The table/view 'Develop.dbo.Intranet_noticias' does not have a pri
     <Parameter Name="tipo" Type="int" Mode="In" />
     <Parameter Name="sw_anuncio" Type="smallint" Mode="In" />
   </Function>
+  <Function Name="WebAppIntranetConsultaUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="user_cve" Type="nchar" Mode="In" />
+    <Parameter Name="tipo" Type="smallint" Mode="In" />
+  </Function>
   <EntityContainer Name="developModelStoreContainer">
+    <EntitySet Name="xcuser" EntityType="Self.xcuser" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Intranet_noticias" EntityType="Self.Intranet_noticias" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [Intranet_noticias].[num_folio] AS [num_folio], 

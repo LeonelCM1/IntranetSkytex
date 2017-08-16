@@ -61,5 +61,80 @@ namespace AccesoDatos
             SqlConnection.ClearAllPools();
             return cumpleanieros;
         }
+        public WebAppIntranetAdmComentarios_Result comentarios(int num_fol, string comentario, string user_cve, DateTime fecha, short sw_visible, int num_folp, short opcion)
+        {
+            WebAppIntranetAdmComentarios_Result coment = contexto.WebAppIntranetAdmComentarios(num_fol, comentario, user_cve, fecha, sw_visible, num_folp, opcion).FirstOrDefault();
+            SqlConnection.ClearAllPools();
+            return coment;
+        }
+        public List<WebAppIntranetConsultaComentarios_Result> ConsultaComentarios(int num_fol, int num_folp, short opcion)
+        {
+            List<WebAppIntranetConsultaComentarios_Result> lista_coment = contexto.WebAppIntranetConsultaComentarios(num_fol, num_folp, opcion).ToList();
+            SqlConnection.ClearAllPools();
+            return lista_coment;
+        }
+        public List<xcuser> Usuarios()
+        {
+            List<xcuser> users = (from u in contexto.xcuser where u.ef_cve == "001" && u.status == 1 select u).Distinct().ToList();
+            SqlConnection.ClearAllPools();
+            return users;
+        }
+        public string Login(string user, string pass)
+        {
+            string usr_cve;
+            var result = (from usuario in contexto.xcuser
+                          where
+                            usuario.user_cve.Equals(user) &&
+                            usuario.password.Equals(pass)
+                          select usuario).SingleOrDefault();
+
+            if (result == null)
+            {
+                return usr_cve = null;
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(result.user_cve) == false)
+                {
+                    usr_cve = result.user_cve;
+                    return usr_cve;
+                }
+                else
+                {
+                    return usr_cve = null;
+                }
+            }
+        }
+        public string nombreUsuario(string user_cve)
+        {
+            string nombre = (from usuario in contexto.xcuser
+                          where
+                            usuario.user_cve.Equals(user_cve)
+                          select usuario.nombre).SingleOrDefault();
+            if (nombre==null)
+            {
+                nombre = "Usuario no encontrado";
+            }
+            SqlConnection.ClearAllPools();
+            return nombre;
+        }
+        public List<WebAppIntranetConsultaUsuarios_Result> Intranet_Usuarios(string user_cve, short tipo)
+        {
+            List<WebAppIntranetConsultaUsuarios_Result> usuarios = contexto.WebAppIntranetConsultaUsuarios(user_cve, tipo).ToList();
+            SqlConnection.ClearAllPools();
+            return usuarios;
+        }
+        public WebAppIntranetAdmUsuarios_Result AdminUsuarios(string user_cve, short rol, string app, short sw_activo, short tipo)
+        {
+            WebAppIntranetAdmUsuarios_Result resultado = contexto.WebAppIntranetAdmUsuarios(user_cve, rol, app, sw_activo, tipo).FirstOrDefault();
+            SqlConnection.ClearAllPools();
+            return resultado;
+        }
+        public List<WebAppIntranetConsultaApps_Result> ConsultaApps(short tipo)
+        {
+            List<WebAppIntranetConsultaApps_Result> apps = contexto.WebAppIntranetConsultaApps(tipo).ToList();
+            SqlConnection.ClearAllPools();
+            return apps;
+        }
     }
 }

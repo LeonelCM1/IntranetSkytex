@@ -15,6 +15,6 @@ C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\Entidades\bin\Debug\E
 C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\Entidades\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\Entidades\bin\Debug\EntityFramework.xml
 C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\Entidades\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache
 C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\Entidades\obj\Debug\Entidades.dll
 C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\Entidades\obj\Debug\Entidades.pdb
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache

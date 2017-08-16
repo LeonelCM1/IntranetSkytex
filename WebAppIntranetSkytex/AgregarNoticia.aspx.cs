@@ -15,7 +15,14 @@ namespace WebAppIntranetSkytex
         LogicaNegocioCLS logica = new LogicaNegocioCLS();
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (Session["user_cve"] != null && (Convert.ToInt16(Session["rol"]) == 1 || Convert.ToInt16(Session["rol"]) == 2))
+            {
+
+            }
+            else
+            {
+                Response.Redirect("Inicio.aspx");
+            }
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
@@ -37,7 +44,7 @@ namespace WebAppIntranetSkytex
             else if (txtTitulo.Text!="" && CKEditor1.Text!="")
             {
                 string noticia = CKEditor1.Text;
-                WebAppIntranetAdmNoticia_Result resultado = logica.AdminNoticias(0,txtTitulo.Text,noticia, txtResumen.Text, DateTime.Today, fileName, "LNC",1);//user
+                WebAppIntranetAdmNoticia_Result resultado = logica.AdminNoticias(0,txtTitulo.Text,noticia, txtResumen.Text, DateTime.Now, fileName, Session["user_cve"].ToString(),1);//user
                 if (resultado.error==0)
                 {
                     Response.Write("<script type=\"text/javascript\">alert('Noticia Agregada Correctamente');window.location.href = 'Inicio.aspx';</script>");

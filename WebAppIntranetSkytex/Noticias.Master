@@ -16,6 +16,7 @@
     	
 </head>
 <body>
+    <form id="form1" runat="server">
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -31,29 +32,93 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <form class="navbar-form navbar-left">
-            </form>
             <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Aplicaciones<span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                        <%
+                            LogicaNegocio.LogicaNegocioCLS logica = new LogicaNegocio.LogicaNegocioCLS();
+                            List<Entidades.WebAppIntranetConsultaUsuarios_Result> nomApp = new List<Entidades.WebAppIntranetConsultaUsuarios_Result>();
+                             
+                            if (Session["user_cve"]==null)
+                            {
+                                nomApp = logica.Intranet_Usuarios("", 4).ToList();
+                            }
+                            else
+                            {
+                                nomApp = logica.Intranet_Usuarios(Session["user_cve"].ToString(),3).ToList();
+                            }
+                            foreach (var item in nomApp)
+                            {
+                                string url = "#";
+                                Entidades.WebAppIntranetConsultaUsuarios_Result app_url = logica.Intranet_Usuarios(item.rol.ToString(), 5).FirstOrDefault();
+                                if (app_url!=null)
+                                {
+                                    url = app_url.app;
+                                }
+                                %>
+                                <li><a href="<%=url %>"><%=item.app %></a></li>
+                            <%}
+                        %>
+                  </ul>
+                </li>
+                
+
                 <li><a href="Cumpleañeros.aspx"><span class="glyphicon glyphicon-gift"></span> Cumpleañeros</a></li>
-                <li><a href="AgregarNoticia.aspx">Agregar Noticia</a></li>
+                <% if ((Convert.ToInt16(Session["rol"]) == 1) || (Convert.ToInt16(Session["rol"]) == 2)){ %><li><a href="AgregarNoticia.aspx">Agregar Noticia</a></li><%} %>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cuenta <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                    <li><a href="#">Iniciar Sesion</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
+                        <% if ((Convert.ToInt16(Session["rol"]) == 1) || (Convert.ToInt16(Session["rol"]) == 2))
+                           { %>
+                            <li><a href="Adm_Usuarios.aspx">Administrar Usuarios</a></li>
+                            <li role="separator" class="divider"></li>
+                        <%} %>
+                        <% if(Convert.ToInt16(Session["rol"])==2){ %>
+                            <li><a href="Adm_Apps.aspx">Administrar Aplicaciones</a></li>
+                            <li role="separator" class="divider"></li>
+                        <%} %>
+                        <% if (Session["user_cve"]==null){ %>
+                            <li><a href="#" data-toggle="modal" data-target="#ModalSesion">Iniciar Sesion</a></li>
+                        <%}else{ %>
+                            <li><asp:LinkButton ID="btnCerrarSesion" runat="server" OnClick="btnCerrarSesion_Click">Cerrar Sesión</asp:LinkButton></li>
+                        <%} %>
                     </ul>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-    <form id="form1" runat="server">
         <div class="container-fluid" style="padding-left:2%; padding-right:2%;">
             <asp:ContentPlaceHolder ID="head" runat="server">
             </asp:ContentPlaceHolder>
+            <!-- Modal Iniciar Sesion -->
+            <div class="modal fade" id="ModalSesion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Iniciar Sesión</h4>
+                  </div>
+                  <div class="modal-body">
+                      <div class="row">
+                          <div class="col-md-2"></div>
+                          <div class="col-md-8">
+                                <asp:DropDownList ID="ddlUsuarios" runat="server" CssClass="form-control"></asp:DropDownList>
+                              <br />
+                                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                        <div class="text-center">
+                            <asp:Button ID="btnIniciarSesion" runat="server" Text="Iniciar Sesión" CssClass="btn btn-success" OnClick="btnIniciarSesion_Click" />
+                        </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Modal Iniciar Sesion -->
         </div>
     </form>
 </body>

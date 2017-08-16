@@ -84,17 +84,25 @@ namespace WebAppIntranetSkytex
             try
             {
                 string titulo = txtNuevoTitulo.Text;
-                string texto = txtNuevoTexto.Text;
+                string texto = txtNuevoTexto.Text.Replace(Environment.NewLine,"<br/>");
                 DateTime fecha_fin = Convert.ToDateTime(txtNuevaFechaFin.Text);
-                WebAppIntranetAdmEventos_Result resultado = logica.AdminAnuncios(0, titulo, texto, DateTime.Today.Date, "LNC",DateTime.Today.Date, fecha_fin,1, 1);
-                if (resultado.error==0)
+                DateTime fecha_ini = Convert.ToDateTime(txtNuevaFechaInicio.Text);
+                if (validarFechas(fecha_ini,fecha_fin))
                 {
-                    txtNuevoTitulo.Text = txtNuevoTexto.Text = txtNuevaFechaFin.Text = "";
-                    Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
+                    WebAppIntranetAdmEventos_Result resultado = logica.AdminAnuncios(0, titulo, texto, DateTime.Today.Date, Session["user_cve"].ToString(),fecha_ini.Date, fecha_fin.Date,1, 1);
+                    if (resultado.error==0)
+                    {
+                        txtNuevoTitulo.Text = txtNuevoTexto.Text = txtNuevaFechaFin.Text = "";
+                        Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
+                    }
+                    else
+                    {
+                        Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
+                    }
                 }
                 else
                 {
-                    Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
+                    Response.Write("<script type=\"text/javascript\">alert('Verificar las fechas ingresadas');</script>");
                 }
             }
             catch (Exception message)
@@ -184,21 +192,49 @@ namespace WebAppIntranetSkytex
                 string texto = txtNuevoTextoEvento.Text;
                 DateTime fecha_ini = Convert.ToDateTime(txtNuevaFechaIniEvento.Text);
                 DateTime fecha_fin = Convert.ToDateTime(txtNuevaFechaFinEvento.Text);
-                WebAppIntranetAdmEventos_Result resultado = logica.AdminAnuncios(0, titulo, texto, DateTime.Today.Date, "LNC", fecha_ini, fecha_fin, 0, 1);
-                if (resultado.error == 0)
+                if (validarFechas(fecha_ini,fecha_fin))
                 {
-                    txtNuevoTituloEvento.Text = txtNuevoTextoEvento.Text = txtNuevaFechaFinEvento.Text = txtNuevaFechaIniEvento.Text = "";
-                    Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
+                    WebAppIntranetAdmEventos_Result resultado = logica.AdminAnuncios(0, titulo, texto, DateTime.Today.Date, Session["user_cve"].ToString(), fecha_ini, fecha_fin, 0, 1);
+                    if (resultado.error == 0)
+                    {
+                        txtNuevoTituloEvento.Text = txtNuevoTextoEvento.Text = txtNuevaFechaFinEvento.Text = txtNuevaFechaIniEvento.Text = "";
+                        Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
+                    }
+                    else
+                    {
+                        Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
+                    }
                 }
                 else
                 {
-                    Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
+                    Response.Write("<script type=\"text/javascript\">alert('Verificar las fechas ingresadas');</script>");
                 }
             }
             catch (Exception message)
             {
                 Response.Write("<script type=\"text/javascript\">alert('" + message + "');window.location.href = 'Inicio.aspx';</script>");
             }
+        }
+
+        protected void GridNoticias_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridNoticias.PageIndex = e.NewPageIndex;
+            GridNoticias.DataBind();
+        }
+        public bool validarFechas(DateTime fec_ini, DateTime fecha_fin)
+        {
+            bool valida = false;
+            int a = DateTime.Compare(fec_ini, fecha_fin);//fecha inicial debe ser menor a la fecha final
+            int b = DateTime.Compare(DateTime.Now.Date, fec_ini);//fecha inicial debe ser mayor a la fecha actual
+            if (a < 0 && b <= 0)
+            {
+                valida = true;
+            }
+            else
+            {
+                valida = false;
+            }
+            return valida;
         }
     }
 }

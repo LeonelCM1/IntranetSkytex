@@ -15,23 +15,31 @@ namespace WebAppIntranetSkytex
         int folio;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["fol"]!=null)
+            if (Session["user_cve"] != null && (Convert.ToInt16(Session["rol"]) == 1 || Convert.ToInt16(Session["rol"]) == 2))
             {
-                folio = Convert.ToInt32(Request.QueryString["fol"]);
-                if (!IsPostBack)
+                if (Request.QueryString["fol"]!=null)
                 {
-                    WebAppIntranetConsultaEventos_Result anuncio = logica.ConsultaEventos(DateTime.Today.Date,folio,0,1).FirstOrDefault();
-                    if (anuncio!=null)
+                    folio = Convert.ToInt32(Request.QueryString["fol"]);
+                    if (!IsPostBack)
                     {
-                        txtTitulo.Text = anuncio.titulo;
-                        txtAnuncio.Text = anuncio.texto;
-                        txtFecha.Text = anuncio.fecha_fin.Date.ToString("yyyy-MM-dd");
-                    }
-                    else
-                    {
-                        Response.Redirect("Inicio.aspx");
-                    }
+                        WebAppIntranetConsultaEventos_Result anuncio = logica.ConsultaEventos(DateTime.Today.Date,folio,0,1).FirstOrDefault();
+                        if (anuncio!=null)
+                        {
+                            txtTitulo.Text = anuncio.titulo;
+                            txtAnuncio.Text = anuncio.texto.Replace("<br/>",Environment.NewLine);
+                            txtFechaFin.Text = anuncio.fecha_fin.Date.ToString("yyyy-MM-dd");
+                            txtFechaIni.Text = anuncio.fecha_ini.Date.ToString("yyyy-MM-dd");
+                        }
+                        else
+                        {
+                            Response.Redirect("Inicio.aspx");
+                        }
                     
+                    }
+                }
+                else
+                {
+                    Response.Redirect("Inicio.aspx");
                 }
             }
             else
@@ -48,17 +56,25 @@ namespace WebAppIntranetSkytex
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
             string titulo = txtTitulo.Text;
-            string texto = txtAnuncio.Text;
+            string texto = txtAnuncio.Text.Replace(Environment.NewLine, "<br/>");
             DateTime fecha = DateTime.Today;
-            DateTime fecha_fin = Convert.ToDateTime(txtFecha.Text);
-            WebAppIntranetAdmEventos_Result resultado = logica.AdminAnuncios(folio, titulo, texto, fecha, "LNC",fecha, fecha_fin,1, 2);
-            if (resultado.error==0)
+            DateTime fecha_fin = Convert.ToDateTime(txtFechaFin.Text);
+            DateTime fecha_ini = Convert.ToDateTime(txtFechaIni.Text);
+            if (validarFechas(fecha_ini,fecha_fin))
             {
-                Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
+                WebAppIntranetAdmEventos_Result resultado = logica.AdminAnuncios(folio, titulo, texto, fecha, Session["user_cve"].ToString(),fecha_ini, fecha_fin,1, 2);
+                if (resultado.error==0)
+                {
+                    Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
+                }
+                else
+                {
+                    Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');</script>");
+                }
             }
             else
             {
-                Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');</script>");
+                Response.Write("<script type=\"text/javascript\">alert('Verificar las fechas ingresadas');</script>");
             }
         }
 
@@ -80,6 +96,20 @@ namespace WebAppIntranetSkytex
             {
                 Response.Write("<script type=\"text/javascript\">alert('" + message + "');</script>");
             }
+        }
+        public bool validarFechas(DateTime fec_ini, DateTime fecha_fin)
+        {
+            bool valida = false;
+            int a = DateTime.Compare(fec_ini, fecha_fin);//fecha inicial debe ser menor a la fecha final
+            if (a < 0)
+            {
+                valida = true;
+            }
+            else
+            {
+                valida = false;
+            }
+            return valida;
         }
     }
 }
