@@ -80,34 +80,28 @@ namespace WebAppIntranetSkytex
             return DiaMes;
         }
         protected void btnAgregarAnuncio_Click(object sender, EventArgs e)
-        {
-            try
+        {            
+            string titulo = txtNuevoTitulo.Text;
+            string texto = txtNuevoTexto.Text.Replace(Environment.NewLine,"<br/>");
+            DateTime fecha = DateTime.Today;
+            DateTime fecha_fin = Convert.ToDateTime(txtNuevaFechaFin.Text);
+            DateTime fecha_ini = Convert.ToDateTime(txtNuevaFechaInicio.Text);
+            if (validarFechas(fecha_ini,fecha_fin))
             {
-                string titulo = txtNuevoTitulo.Text;
-                string texto = txtNuevoTexto.Text.Replace(Environment.NewLine,"<br/>");
-                DateTime fecha_fin = Convert.ToDateTime(txtNuevaFechaFin.Text);
-                DateTime fecha_ini = Convert.ToDateTime(txtNuevaFechaInicio.Text);
-                if (validarFechas(fecha_ini,fecha_fin))
+                WebAppIntranetAdmEventos_Result resultado = logica.AdminAnuncios(1, titulo, texto, fecha, Session["user_cve"].ToString(), fecha_ini, fecha_fin, 1, 1);
+                if (resultado.error==0)
                 {
-                    WebAppIntranetAdmEventos_Result resultado = logica.AdminAnuncios(0, titulo, texto, DateTime.Today.Date, Session["user_cve"].ToString(),fecha_ini.Date, fecha_fin.Date,1, 1);
-                    if (resultado.error==0)
-                    {
-                        txtNuevoTitulo.Text = txtNuevoTexto.Text = txtNuevaFechaFin.Text = "";
-                        Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
-                    }
-                    else
-                    {
-                        Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
-                    }
+                    txtNuevoTitulo.Text = txtNuevoTexto.Text = txtNuevaFechaFin.Text = "";
+                    Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
                 }
                 else
                 {
-                    Response.Write("<script type=\"text/javascript\">alert('Verificar las fechas ingresadas');</script>");
+                    Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
                 }
             }
-            catch (Exception message)
+            else
             {
-                Response.Write("<script type=\"text/javascript\">alert('" + message + "');window.location.href = 'Inicio.aspx';</script>");
+                Response.Write("<script type=\"text/javascript\">alert('Verificar las fechas ingresadas');</script>");
             }
         }
 

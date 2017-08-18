@@ -101,8 +101,7 @@ namespace WebAppIntranetSkytex
         {
             bool valida = false;
             int a = DateTime.Compare(fec_ini, fecha_fin);//fecha inicial debe ser menor a la fecha final
-            int b = DateTime.Compare(DateTime.Now, fec_ini);//fecha inicial debe ser mayor a la fecha actual
-            if (a < 0 && b <= 0)
+            if (a < 0)
             {
                 valida = true;
             }

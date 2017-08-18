@@ -39,7 +39,7 @@
                         <%
                             LogicaNegocio.LogicaNegocioCLS logica = new LogicaNegocio.LogicaNegocioCLS();
                             List<Entidades.WebAppIntranetConsultaUsuarios_Result> nomApp = new List<Entidades.WebAppIntranetConsultaUsuarios_Result>();
-                             
+                            string user = ""; 
                             if (Session["user_cve"]==null)
                             {
                                 nomApp = logica.Intranet_Usuarios("", 4).ToList();
@@ -47,6 +47,7 @@
                             else
                             {
                                 nomApp = logica.Intranet_Usuarios(Session["user_cve"].ToString(),3).ToList();
+                                user = Session["user_cve"].ToString();
                             }
                             foreach (var item in nomApp)
                             {
@@ -55,11 +56,15 @@
                                 if (app_url!=null)
                                 {
                                     url = app_url.app;
+                                    if (user!="")
+                                    {
+                                        url = string.Format(url + "?u=" + HttpUtility.UrlEncode(Encrypt(user)));
+                                    }
+                                    
                                 }
                                 %>
                                 <li><a href="<%=url %>"><%=item.app %></a></li>
-                            <%}
-                        %>
+                            <%}%>
                   </ul>
                 </li>
                 
@@ -86,8 +91,8 @@
                     </ul>
                 </li>
             </ul>
-        </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+        </div>
+        </div>
     </nav>
         <div class="container-fluid" style="padding-left:2%; padding-right:2%;">
             <asp:ContentPlaceHolder ID="head" runat="server">
