@@ -13,9 +13,11 @@ namespace Entidades
     
     public partial class WebAppIntranetConsultaUsuarios_Result
     {
-        public string user_cve { get; set; }
-        public Nullable<short> rol { get; set; }
-        public string app { get; set; }
-        public Nullable<short> sw_activo { get; set; }
+        public string sp_cve { get; set; }
+        public Nullable<short> num_reng { get; set; }
+        public string spd_cve { get; set; }
+        public string prm6 { get; set; }
+        public string prm7 { get; set; }
+        public Nullable<short> prm14 { get; set; }
     }
 }

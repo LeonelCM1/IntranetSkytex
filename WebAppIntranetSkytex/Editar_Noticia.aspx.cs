@@ -24,7 +24,7 @@ namespace WebAppIntranetSkytex
                     folio = Convert.ToInt32(Request.QueryString["n"]);
                     if (!IsPostBack)
                     {
-                        Intranet_noticias noticia = logica.ConsultaNoticiaPorFolio(folio);
+                        WebAppIntranetConsultaNoticias_Result noticia = logica.ConsultaNoticias(folio, 1, 2).FirstOrDefault();
                         if (noticia!=null)
                         {
                             txtTitulo.Text = noticia.titulo;
@@ -56,29 +56,40 @@ namespace WebAppIntranetSkytex
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
-            if (Imagen1.HasFile)
+            if (txtResumen.Text.Length > 250)
             {
-                imagen = Path.GetFileName(Imagen1.PostedFile.FileName);
-                Imagen1.PostedFile.SaveAs(Server.MapPath("~/Media/") + imagen);
+                Response.Write("<script type=\"text/javascript\">alert('El resumen solo puede contener 250 caracteres');</script>");
             }
-            string titulo = txtTitulo.Text;
-            string resumen = txtResumen.Text;
-            string noticia = CKEditor1.Text;
-            try
+            else if (txtTitulo.Text.Trim(' ') != "" && CKEditor1.Text.Trim(' ') != "" && txtResumen.Text.Trim(' ') != "")
             {
-                WebAppIntranetAdmNoticia_Result resultado = logica.AdminNoticias(folio, titulo, noticia, resumen, DateTime.Today, imagen, Session["user_cve"].ToString(), 2);
-                if (resultado.error==0)
+                if (Imagen1.HasFile)
                 {
-                    Response.Write("<script type=\"text/javascript\">alert('Noticia Actualizada Correctamente');window.location.href = 'Inicio.aspx';</script>");
+                    imagen = Path.GetFileName(Imagen1.PostedFile.FileName);
+                    Imagen1.PostedFile.SaveAs(Server.MapPath("~/Media/") + imagen);
                 }
-                else
+                string titulo = txtTitulo.Text;
+                string resumen = txtResumen.Text;
+                string noticia = CKEditor1.Text;
+                try
                 {
-                    Response.Write("<script type=\"text/javascript\">alert('Error: " + resultado.mensaje + "');</script>");
+                    WebAppIntranetAdmNoticia_Result resultado = logica.AdminNoticias(folio, titulo, noticia, resumen, DateTime.Today, imagen, Session["user_cve"].ToString(),1,DateTime.Today, 2);
+                    if (resultado.error==0)
+                    {
+                        Response.Write("<script type=\"text/javascript\">alert('Noticia Actualizada Correctamente');window.location.href = 'Inicio.aspx';</script>");
+                    }
+                    else
+                    {
+                        Response.Write("<script type=\"text/javascript\">alert('Error: " + resultado.mensaje + "');</script>");
+                    }
+                }
+                catch (Exception message)
+                {
+                    Response.Write("<script type=\"text/javascript\">alert('" + message + "');</script>");
                 }
             }
-            catch (Exception message)
+            else
             {
-                Response.Write("<script type=\"text/javascript\">alert('" + message + "');</script>");
+                Response.Write("<script type=\"text/javascript\">alert('Completar todos los campos');window.location.href = window.location.href;</script>");
             }
         }
 
@@ -86,7 +97,7 @@ namespace WebAppIntranetSkytex
         {
             try
             {
-                WebAppIntranetAdmNoticia_Result resultado = logica.AdminNoticias(folio, "", "", "", DateTime.Today, "",Session["user_cve"].ToString(), 3);
+                WebAppIntranetAdmNoticia_Result resultado = logica.AdminNoticias(folio, "", "", "", DateTime.Today, "",Session["user_cve"].ToString(),1,DateTime.Today, 3);
                 if (resultado.error==0)
                 {
                     Response.Write("<script type=\"text/javascript\">alert('Noticia Eliminada Correctamente');window.location.href = 'Inicio.aspx';</script>");

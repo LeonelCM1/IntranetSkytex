@@ -33,22 +33,15 @@ namespace WebAppIntranetSkytex
             WebAppIntranetConsultaUsuarios_Result user = logica.Intranet_Usuarios(usuario, 1).FirstOrDefault();
             if (usuario!=null)
             {
-                if (user!=null)
+                if (user.num_reng==1)
                 {
-                    if (user.sw_activo==1)
-                    {
-                        Session["user_cve"] = usuario;
-                        Session["rol"] = user.rol;
-                        Page.Response.Redirect(Page.Request.Url.ToString(), true);
-                    }
-                    else
-                    {
-                        Response.Write("<script type=\"text/javascript\">alert('Usuario Bloqueado');</script>");
-                    }
+                    Session["user_cve"] = usuario;
+                    Session["rol"] = user.prm14;
+                    Page.Response.Redirect(Page.Request.Url.ToString(), true);
                 }
                 else
                 {
-                    Response.Write("<script type=\"text/javascript\">alert('Error al iniciar sesión');</script>");
+                    Response.Write("<script type=\"text/javascript\">alert('Usuario Bloqueado');</script>");
                 }
             }
             else
@@ -64,26 +57,36 @@ namespace WebAppIntranetSkytex
             Session.Abandon();
             Response.Redirect("Inicio.aspx");
         }
-        public string Encrypt(string clearText)
+        public string encripta(string _data)
         {
-            string EncryptionKey = "MAKV2SPBNI99212";
-            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
-            using (Aes encryptor = Aes.Create())
-            {
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
-                    {
-                        cs.Write(clearBytes, 0, clearBytes.Length);
-                        cs.Close();
-                    }
-                    clearText = Convert.ToBase64String(ms.ToArray());
-                }
+            string _key24 = "123456789012345678901234";
+            string _iv ="password";
+            byte[] key = Encoding.ASCII.GetBytes(_key24);
+            byte[] iv = Encoding.ASCII.GetBytes(_iv);
+            byte[] data = Encoding.ASCII.GetBytes(_data);
+            byte[] enc = new byte[0];
+            TripleDES tdes = TripleDES.Create();
+
+            tdes.Mode = CipherMode.CBC;
+            tdes.Padding = PaddingMode.Zeros;
+            tdes.IV = iv;
+            tdes.Key = key;
+
+            ICryptoTransform ict = tdes.CreateEncryptor();
+            enc = ict.TransformFinalBlock(data, 0, data.Length);
+            return Convert.ToBase64String(enc);
+        }
+
+        public List<WebAppIntranetConsultaUsuarios_Result> ListaDeApps()
+        {
+            List<WebAppIntranetConsultaUsuarios_Result> apps = new List<WebAppIntranetConsultaUsuarios_Result>();
+            string usuario ="zzz";
+            if (Session["user_cve"]!=null)
+	        {
+                usuario = Session["user_cve"].ToString();
             }
-            return clearText;
+            apps = logica.Intranet_Usuarios(usuario, 2);
+            return apps;
         }
     }
 }

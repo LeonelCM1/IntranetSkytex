@@ -1,0 +1,10 @@
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\Entidades\bin\Release\Entidades.dll.config
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\Entidades\bin\Release\Entidades.dll
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\Entidades\bin\Release\Entidades.pdb
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\Entidades\bin\Release\EntityFramework.dll
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\Entidades\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\Entidades\bin\Release\EntityFramework.xml
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\Entidades\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\Entidades\obj\Release\Entidades.csprojResolveAssemblyReference.cache
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\Entidades\obj\Release\Entidades.dll
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\Entidades\obj\Release\Entidades.pdb

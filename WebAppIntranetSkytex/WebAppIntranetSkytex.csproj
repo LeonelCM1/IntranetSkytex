@@ -108,10 +108,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Media\Mini\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Adm_Apps.aspx" />
     <Content Include="Adm_Usuarios.aspx" />
     <Content Include="AgregarNoticia.aspx" />
     <Content Include="ckeditor\adapters\jquery.js" />
@@ -344,18 +342,48 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\estilos.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="Cumpleañeros.aspx" />
+    <Content Include="Cumpleanieros.aspx" />
     <Content Include="Editar_Anuncio.aspx" />
     <Content Include="Editar_Evento.aspx" />
     <Content Include="Editar_Noticia.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Inicio.aspx" />
+    <Content Include="Media\banner1.jpg" />
+    <Content Include="Media\banner2.jpg" />
+    <Content Include="Media\bats.PNG" />
+    <Content Include="Media\boton.JPG" />
+    <Content Include="Media\calendario.JPG" />
+    <Content Include="Media\Cumpleanios.png" />
+    <Content Include="Media\Cumpleanios1.png" />
+    <Content Include="Media\Cumpleanios10.png" />
+    <Content Include="Media\Cumpleanios11.png" />
+    <Content Include="Media\Cumpleanios12.png" />
+    <Content Include="Media\Cumpleanios13.png" />
+    <Content Include="Media\Cumpleanios14.png" />
+    <Content Include="Media\Cumpleanios1X.png" />
+    <Content Include="Media\Cumpleanios2.png" />
+    <Content Include="Media\Cumpleanios2X.png" />
+    <Content Include="Media\Cumpleanios3.png" />
+    <Content Include="Media\Cumpleanios3X.png" />
+    <Content Include="Media\Cumpleanios4.png" />
+    <Content Include="Media\Cumpleanios5.png" />
+    <Content Include="Media\Cumpleanios6.png" />
+    <Content Include="Media\Cumpleanios7.png" />
+    <Content Include="Media\Cumpleanios8.png" />
+    <Content Include="Media\Cumpleanios9.png" />
     <Content Include="Media\Liston.png" />
     <Content Include="Media\LogoSkytex.jpg" />
+    <Content Include="Media\Mini\banner1.jpg" />
+    <Content Include="Media\Mini\banner2.jpg" />
+    <Content Include="Media\Mini\boton.JPG" />
+    <Content Include="Media\Mini\calendario.JPG" />
+    <Content Include="Media\Mini\user-male-icon_34332.png" />
+    <Content Include="Media\Mini\z13wx0uhfwdy.png" />
     <Content Include="Media\skytex.ico" />
     <Content Include="Media\user-male-icon_34332.png" />
     <Content Include="Media\z13wx0uhfwdy.png" />
     <Content Include="Noticia.aspx" />
+    <Content Include="Nuevo_Ingreso.aspx" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -379,6 +407,7 @@
     <Content Include="ckeditor\samples\toolbarconfigurator\font\fontello.ttf" />
     <Content Include="ckeditor\samples\toolbarconfigurator\font\fontello.woff" />
     <Content Include="ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
+    <None Include="Properties\PublishProfiles\Intranet.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -423,13 +452,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adm_Apps.aspx.cs">
-      <DependentUpon>Adm_Apps.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Adm_Apps.aspx.designer.cs">
-      <DependentUpon>Adm_Apps.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Adm_Usuarios.aspx.cs">
       <DependentUpon>Adm_Usuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -446,12 +468,12 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Cumpleañeros.aspx.cs">
-      <DependentUpon>Cumpleañeros.aspx</DependentUpon>
+    <Compile Include="Cumpleanieros.aspx.cs">
+      <DependentUpon>Cumpleanieros.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Cumpleañeros.aspx.designer.cs">
-      <DependentUpon>Cumpleañeros.aspx</DependentUpon>
+    <Compile Include="Cumpleanieros.aspx.designer.cs">
+      <DependentUpon>Cumpleanieros.aspx</DependentUpon>
     </Compile>
     <Compile Include="Editar_Anuncio.aspx.cs">
       <DependentUpon>Editar_Anuncio.aspx</DependentUpon>
@@ -497,6 +519,13 @@
     </Compile>
     <Compile Include="Noticias.Master.designer.cs">
       <DependentUpon>Noticias.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Nuevo_Ingreso.aspx.cs">
+      <DependentUpon>Nuevo_Ingreso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Nuevo_Ingreso.aspx.designer.cs">
+      <DependentUpon>Nuevo_Ingreso.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

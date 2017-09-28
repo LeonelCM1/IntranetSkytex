@@ -74,7 +74,7 @@ namespace WebAppIntranetSkytex
             }
             else
             {
-                Response.Write("<script type=\"text/javascript\">alert('Verificar las fechas ingresadas');</script>");
+                Response.Write("<script type=\"text/javascript\">alert('Verificar las fechas ingresadas');window.location.href = window.location.href;</script>");
             }
         }
 

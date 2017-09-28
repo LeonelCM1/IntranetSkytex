@@ -27,10 +27,10 @@ namespace Entidades
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Intranet_noticias> Intranet_noticias { get; set; }
         public virtual DbSet<xcuser> xcuser { get; set; }
+        public virtual DbSet<Intranet_noticias> Intranet_noticias { get; set; }
     
-        public virtual ObjectResult<WebAppIntranetAdmNoticia_Result> WebAppIntranetAdmNoticia(Nullable<int> num_fol, string titulo, string noticia, string resumen, Nullable<System.DateTime> fecha, string imagenUrl, string autor, Nullable<short> opcion)
+        public virtual ObjectResult<WebAppIntranetAdmNoticia_Result> WebAppIntranetAdmNoticia(Nullable<int> num_fol, string titulo, string noticia, string resumen, Nullable<System.DateTime> fecha, string imagenUrl, string autor, Nullable<short> sw_noticia, Nullable<System.DateTime> fec_venc, Nullable<short> opcion)
         {
             var num_folParameter = num_fol.HasValue ?
                 new ObjectParameter("num_fol", num_fol) :
@@ -60,11 +60,19 @@ namespace Entidades
                 new ObjectParameter("autor", autor) :
                 new ObjectParameter("autor", typeof(string));
     
+            var sw_noticiaParameter = sw_noticia.HasValue ?
+                new ObjectParameter("sw_noticia", sw_noticia) :
+                new ObjectParameter("sw_noticia", typeof(short));
+    
+            var fec_vencParameter = fec_venc.HasValue ?
+                new ObjectParameter("fec_venc", fec_venc) :
+                new ObjectParameter("fec_venc", typeof(System.DateTime));
+    
             var opcionParameter = opcion.HasValue ?
                 new ObjectParameter("opcion", opcion) :
                 new ObjectParameter("opcion", typeof(short));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WebAppIntranetAdmNoticia_Result>("WebAppIntranetAdmNoticia", num_folParameter, tituloParameter, noticiaParameter, resumenParameter, fechaParameter, imagenUrlParameter, autorParameter, opcionParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WebAppIntranetAdmNoticia_Result>("WebAppIntranetAdmNoticia", num_folParameter, tituloParameter, noticiaParameter, resumenParameter, fechaParameter, imagenUrlParameter, autorParameter, sw_noticiaParameter, fec_vencParameter, opcionParameter);
         }
     
         public virtual ObjectResult<WebAppIntranetConsultaEventos_Result> WebAppIntranetConsultaEventos(Nullable<System.DateTime> fecha_consulta, Nullable<int> num_fol, Nullable<int> tipo, Nullable<short> sw_anuncio)
@@ -116,19 +124,6 @@ namespace Entidades
                 new ObjectParameter("opcion", typeof(short));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WebAppIntranetConsultaComentarios_Result>("WebAppIntranetConsultaComentarios", num_folParameter, num_folpParameter, opcionParameter);
-        }
-    
-        public virtual ObjectResult<WebAppIntranetConsultaUsuarios_Result> WebAppIntranetConsultaUsuarios(string user_cve, Nullable<short> tipo)
-        {
-            var user_cveParameter = user_cve != null ?
-                new ObjectParameter("user_cve", user_cve) :
-                new ObjectParameter("user_cve", typeof(string));
-    
-            var tipoParameter = tipo.HasValue ?
-                new ObjectParameter("tipo", tipo) :
-                new ObjectParameter("tipo", typeof(short));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WebAppIntranetConsultaUsuarios_Result>("WebAppIntranetConsultaUsuarios", user_cveParameter, tipoParameter);
         }
     
         public virtual ObjectResult<WebAppIntranetAdmUsuarios_Result> WebAppIntranetAdmUsuarios(string user_cve, Nullable<short> rol, string app, Nullable<short> sw_visible, Nullable<short> tipo)
@@ -237,6 +232,36 @@ namespace Entidades
                 new ObjectParameter("opcion", typeof(short));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WebAppIntranetAdmEventos_Result>("WebAppIntranetAdmEventos", num_folParameter, tituloParameter, textoParameter, fecha_publiParameter, autorParameter, fecha_iniParameter, fecha_finParameter, sw_anuncioParameter, opcionParameter);
+        }
+    
+        public virtual ObjectResult<WebAppIntranetConsultaUsuarios_Result> WebAppIntranetConsultaUsuarios(string user_cve, Nullable<short> tipo)
+        {
+            var user_cveParameter = user_cve != null ?
+                new ObjectParameter("user_cve", user_cve) :
+                new ObjectParameter("user_cve", typeof(string));
+    
+            var tipoParameter = tipo.HasValue ?
+                new ObjectParameter("tipo", tipo) :
+                new ObjectParameter("tipo", typeof(short));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WebAppIntranetConsultaUsuarios_Result>("WebAppIntranetConsultaUsuarios", user_cveParameter, tipoParameter);
+        }
+    
+        public virtual ObjectResult<WebAppIntranetConsultaNoticias_Result> WebAppIntranetConsultaNoticias(Nullable<int> num_fol, Nullable<short> sw_noticia, Nullable<short> tipo)
+        {
+            var num_folParameter = num_fol.HasValue ?
+                new ObjectParameter("num_fol", num_fol) :
+                new ObjectParameter("num_fol", typeof(int));
+    
+            var sw_noticiaParameter = sw_noticia.HasValue ?
+                new ObjectParameter("sw_noticia", sw_noticia) :
+                new ObjectParameter("sw_noticia", typeof(short));
+    
+            var tipoParameter = tipo.HasValue ?
+                new ObjectParameter("tipo", tipo) :
+                new ObjectParameter("tipo", typeof(short));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WebAppIntranetConsultaNoticias_Result>("WebAppIntranetConsultaNoticias", num_folParameter, sw_noticiaParameter, tipoParameter);
         }
     }
 }

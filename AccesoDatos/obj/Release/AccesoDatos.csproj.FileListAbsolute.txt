@@ -1,0 +1,12 @@
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\AccesoDatos\bin\Release\AccesoDatos.dll.config
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\AccesoDatos\bin\Release\AccesoDatos.dll
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\AccesoDatos\bin\Release\AccesoDatos.pdb
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\AccesoDatos\bin\Release\Entidades.dll
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\AccesoDatos\bin\Release\EntityFramework.dll
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\AccesoDatos\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\AccesoDatos\bin\Release\Entidades.pdb
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\AccesoDatos\bin\Release\EntityFramework.xml
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\AccesoDatos\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\AccesoDatos\obj\Release\AccesoDatos.csprojResolveAssemblyReference.cache
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\AccesoDatos\obj\Release\AccesoDatos.dll
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\AccesoDatos\obj\Release\AccesoDatos.pdb

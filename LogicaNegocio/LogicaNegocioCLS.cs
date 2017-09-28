@@ -15,10 +15,6 @@ namespace LogicaNegocio
         {
             datos = new AccesoDatosCLS();
         }
-        public List<Intranet_noticias> ConsultaNoticias()
-        {
-            return (datos.ConsultaNoticias());
-        }
         public List<WebAppIntranetConsultaEventos_Result> ConsultaAnuncios()
         {
             return (datos.ConsultaAnuncios());
@@ -27,17 +23,13 @@ namespace LogicaNegocio
         {
             return (datos.ConsultaEventos(fecha,folio,tipo,sw_anuncio));
         }
-        public Intranet_noticias ConsultaNoticiaPorFolio(int folio)
-        {
-            return (datos.ConsultaNoticiaPorFolio(folio));
-        }
         public WebAppIntranetAdmEventos_Result AdminAnuncios(int num_fol, string titulo, string texto, DateTime fecha, string autor, DateTime fecha_ini, DateTime fecha_fin, short sw_anuncio, short opcion)
         {
             return (datos.AdminAnuncios(num_fol, titulo, texto, fecha, autor, fecha_ini, fecha_fin, sw_anuncio, opcion));
         }
-        public WebAppIntranetAdmNoticia_Result AdminNoticias(int num_fol, string titulo, string noticia, string resumen, DateTime fecha, string imagen, string autor, short opcion)
+        public WebAppIntranetAdmNoticia_Result AdminNoticias(int num_fol, string titulo, string noticia, string resumen, DateTime fecha, string imagen, string autor, short sw_noticia, DateTime fec_venc, short opcion)
         {
-            return (datos.AdminNoticias(num_fol, titulo, noticia, resumen, fecha, imagen, autor, opcion));
+            return (datos.AdminNoticias(num_fol, titulo, noticia, resumen, fecha, imagen, autor, sw_noticia, fec_venc, opcion));
         }
         public List<WebAppIntranetBirthday_Result> cumpleanios(DateTime fecha, short tipo)
         {
@@ -74,6 +66,10 @@ namespace LogicaNegocio
         public string nombreUsuario(string user_cve)
         {
             return (datos.nombreUsuario(user_cve));
+        }
+        public List<WebAppIntranetConsultaNoticias_Result> ConsultaNoticias(int num_fol, short sw_noticia, short tipo)
+        {
+            return (datos.ConsultaNoticias(num_fol, sw_noticia, tipo));
         }
     }
 }

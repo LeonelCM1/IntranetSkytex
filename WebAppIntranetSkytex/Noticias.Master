@@ -1,5 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Noticias.master.cs" Inherits="WebAppIntranetSkytex.Noticias" %>
-
+<meta name="viewport" content="width=device-width, initial-scale=1" >
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -33,54 +33,33 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Aplicaciones<span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                        <%
-                            LogicaNegocio.LogicaNegocioCLS logica = new LogicaNegocio.LogicaNegocioCLS();
-                            List<Entidades.WebAppIntranetConsultaUsuarios_Result> nomApp = new List<Entidades.WebAppIntranetConsultaUsuarios_Result>();
-                            string user = ""; 
-                            if (Session["user_cve"]==null)
-                            {
-                                nomApp = logica.Intranet_Usuarios("", 4).ToList();
-                            }
-                            else
-                            {
-                                nomApp = logica.Intranet_Usuarios(Session["user_cve"].ToString(),3).ToList();
-                                user = Session["user_cve"].ToString();
-                            }
-                            foreach (var item in nomApp)
-                            {
-                                string url = "#";
-                                Entidades.WebAppIntranetConsultaUsuarios_Result app_url = logica.Intranet_Usuarios(item.rol.ToString(), 5).FirstOrDefault();
-                                if (app_url!=null)
-                                {
-                                    url = app_url.app;
-                                    if (user!="")
-                                    {
-                                        url = string.Format(url + "?u=" + HttpUtility.UrlEncode(Encrypt(user)));
-                                    }
-                                    
-                                }
-                                %>
-                                <li><a href="<%=url %>"><%=item.app %></a></li>
-                            <%}%>
-                  </ul>
-                </li>
-                
-
-                <li><a href="Cumpleañeros.aspx"><span class="glyphicon glyphicon-gift"></span> Cumpleañeros</a></li>
+                <%if (ListaDeApps().FirstOrDefault().prm14!=0)
+                  {%>
+                      <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Aplicaciones<span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                           <%
+                               foreach (var item in ListaDeApps())
+                               {
+                                   if (item.prm14==1)
+                                   {
+                                       string url = string.Format(item.prm7 + "?u=" + encripta(Session["user_cve"].ToString()));
+                                       %><li><a href="<%=url %>"><%=item.prm6 %></a></li><%
+                                   }                               
+                               }
+                           %>
+                      </ul>
+                    </li>
+                  <%} %>
+                <li><a href="Nuevo_Ingreso.aspx"><span class="glyphicon glyphicon-user"></span> Nuevo Ingreso</a></li>
+                <li><a href="Cumpleanieros.aspx"><span class="glyphicon glyphicon-gift"></span> Cumpleañeros</a></li>
                 <% if ((Convert.ToInt16(Session["rol"]) == 1) || (Convert.ToInt16(Session["rol"]) == 2)){ %><li><a href="AgregarNoticia.aspx">Agregar Noticia</a></li><%} %>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cuenta <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <% if ((Convert.ToInt16(Session["rol"]) == 1) || (Convert.ToInt16(Session["rol"]) == 2))
+                        <% if (Convert.ToInt16(Session["rol"]) == 2)
                            { %>
                             <li><a href="Adm_Usuarios.aspx">Administrar Usuarios</a></li>
-                            <li role="separator" class="divider"></li>
-                        <%} %>
-                        <% if(Convert.ToInt16(Session["rol"])==2){ %>
-                            <li><a href="Adm_Apps.aspx">Administrar Aplicaciones</a></li>
                             <li role="separator" class="divider"></li>
                         <%} %>
                         <% if (Session["user_cve"]==null){ %>

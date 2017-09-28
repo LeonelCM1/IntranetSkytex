@@ -1,0 +1,11 @@
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\LogicaNegocio\bin\Release\LogicaNegocio.dll
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\LogicaNegocio\bin\Release\LogicaNegocio.pdb
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\LogicaNegocio\bin\Release\AccesoDatos.dll
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\LogicaNegocio\bin\Release\Entidades.dll
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\LogicaNegocio\bin\Release\EntityFramework.dll
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\LogicaNegocio\bin\Release\AccesoDatos.pdb
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\LogicaNegocio\bin\Release\Entidades.pdb
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\LogicaNegocio\bin\Release\EntityFramework.xml
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\LogicaNegocio\obj\Release\LogicaNegocio.csprojResolveAssemblyReference.cache
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\LogicaNegocio\obj\Release\LogicaNegocio.dll
+C:\Users\jose.polledo\Documents\Repo_Github\IntranetSkytex\LogicaNegocio\obj\Release\LogicaNegocio.pdb

@@ -28,7 +28,7 @@
                 </div>
                 <div class="text-center">
                     <% if (Convert.ToInt16(Session["rol"]) == 1 || Convert.ToInt16(Session["rol"]) == 2){ %>
-                        <a class="btn btn-info" href="/Editar_Noticia.aspx?n=<%=fol%>" role="button">Editar</a>
+                        <a class="btn btn-info" href="Editar_Noticia.aspx?n=<%=Convert.ToInt32(Request.QueryString["n"])%>" role="button">Editar</a>
                     <%} %>
                 </div>
             </div>
@@ -102,6 +102,7 @@
             </div>
         </div>
     </div>
+    <h1><%=code()%></h1>
     <script type="text/javascript">
         function validar() {
             if ($('#<%=txtComentario.ClientID%>').val() === '') {

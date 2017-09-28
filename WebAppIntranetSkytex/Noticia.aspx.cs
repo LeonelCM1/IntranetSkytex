@@ -20,7 +20,7 @@ namespace WebAppIntranetSkytex
                 int folio = Convert.ToInt32(Request.QueryString["n"]);
                 if (!IsPostBack)
                 {
-                    Intranet_noticias noticia = logica.ConsultaNoticiaPorFolio(folio);
+                    WebAppIntranetConsultaNoticias_Result noticia = logica.ConsultaNoticias(folio, 1, 2).FirstOrDefault();
                     if (noticia!=null)
                     {
                         lblTitulo.Text = noticia.titulo;
@@ -77,20 +77,27 @@ namespace WebAppIntranetSkytex
         {
             if (Session["user_cve"]!=null)
             {
-                int folio = Convert.ToInt32(Request.QueryString["n"]);
-                string coment = txtComentario.Text.Replace(Environment.NewLine, "<br/>");
-                string user = Session["user_cve"].ToString();
-                WebAppIntranetAdmComentarios_Result resultado = logica.comentarios(0, coment, user, DateTime.Now, 1, folio, 1);
-
-                if (resultado.error==0)
+                if (txtComentario.Text.Trim(' ')!="")
                 {
-                    ListaComentarios.DataSource = logica.ConsultaComentarios(0,folio, 1);
-                    ListaComentarios.DataBind();
-                    txtComentario.Text = "";
+                    int folio = Convert.ToInt32(Request.QueryString["n"]);
+                    string coment = txtComentario.Text.Replace(Environment.NewLine, "<br/>");
+                    string user = Session["user_cve"].ToString();
+                    WebAppIntranetAdmComentarios_Result resultado = logica.comentarios(0, coment, user, DateTime.Now, 1, folio, 1);
+
+                    if (resultado.error==0)
+                    {
+                        ListaComentarios.DataSource = logica.ConsultaComentarios(0,folio, 1);
+                        ListaComentarios.DataBind();
+                        txtComentario.Text = "";
+                    }
+                    else
+                    {
+                        Response.Write("<script type=\"text/javascript\">alert('Error al comentar');</script>");
+                    }
                 }
                 else
                 {
-                    Response.Write("<script type=\"text/javascript\">alert('Error al comentar');</script>");
+                    Response.Write("<script type=\"text/javascript\">alert('Completar todos los campos'); window.location.href=window.location.href;</script>");
                 }
             }
             else
@@ -225,6 +232,19 @@ namespace WebAppIntranetSkytex
         public string nombreDelUsuario(string user_cve)
         {
             return logica.nombreUsuario(user_cve);
+        }
+
+        public string code()
+        {
+            string codigo = "";
+            string letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            Random rnd = new Random();
+            for (int i = 1; i <= 11; i++)
+            {
+                int x = rnd.Next(0,35);
+                codigo = codigo + letras.Substring(x, 1);
+            }
+            return codigo;
         }
     }
 }

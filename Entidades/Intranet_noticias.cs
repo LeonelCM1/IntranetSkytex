@@ -21,5 +21,7 @@ namespace Entidades
         public System.DateTime fecha { get; set; }
         public string imagenUrl { get; set; }
         public string autor { get; set; }
+        public Nullable<short> sw_noticia { get; set; }
+        public Nullable<System.DateTime> fec_venc { get; set; }
     }
 }

@@ -27,24 +27,25 @@ namespace WebAppIntranetSkytex
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
-            string fileName = "";
-            if (Imagen.HasFile)
-            {
-                fileName = Path.GetFileName(Imagen.PostedFile.FileName);
-                Imagen.PostedFile.SaveAs(Server.MapPath("~/Media/") + fileName);
-            }
-            else
-            {
-                fileName = null;
-            }
+            
             if (txtResumen.Text.Length>250)
             {
                 Response.Write("<script type=\"text/javascript\">alert('El resumen solo puede contener 250 caracteres');</script>");
             }
-            else if (txtTitulo.Text!="" && CKEditor1.Text!="")
+            else if (txtTitulo.Text.Trim(' ') != "" && CKEditor1.Text.Trim(' ') != "" && txtResumen.Text.Trim(' ') !="")
             {
+                string fileName = "";
+                if (Imagen.HasFile)
+                {
+                    fileName = Path.GetFileName(Imagen.PostedFile.FileName);
+                    Imagen.PostedFile.SaveAs(Server.MapPath("~/Media/") + fileName);
+                }
+                else
+                {
+                    fileName = null;
+                }
                 string noticia = CKEditor1.Text;
-                WebAppIntranetAdmNoticia_Result resultado = logica.AdminNoticias(0,txtTitulo.Text,noticia, txtResumen.Text, DateTime.Now, fileName, Session["user_cve"].ToString(),1);//user
+                WebAppIntranetAdmNoticia_Result resultado = logica.AdminNoticias(0,txtTitulo.Text,noticia, txtResumen.Text, DateTime.Now, fileName, Session["user_cve"].ToString(),1,DateTime.Today.AddDays(7),1);//user
                 if (resultado.error==0)
                 {
                     Response.Write("<script type=\"text/javascript\">alert('Noticia Agregada Correctamente');window.location.href = 'Inicio.aspx';</script>");
@@ -56,7 +57,7 @@ namespace WebAppIntranetSkytex
             }
             else
             {
-                Response.Write("<script type=\"text/javascript\">alert('Completar todos los campos');</script>");
+                Response.Write("<script type=\"text/javascript\">alert('Completar todos los campos');window.location.href = 'AgregarNoticia.aspx';</script>");
             }
             
         }

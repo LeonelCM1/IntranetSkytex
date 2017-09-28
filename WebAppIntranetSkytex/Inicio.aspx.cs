@@ -16,11 +16,11 @@ namespace WebAppIntranetSkytex
         LogicaNegocioCLS logica = new LogicaNegocioCLS();
         protected void Page_Load(object sender, EventArgs e)
         {
-            GridNoticias.DataSource = logica.ConsultaNoticias();
+            GridNoticias.DataSource = logica.ConsultaNoticias(0,1,1);
             GridNoticias.DataBind();
             dtAnuncios.DataSource = logica.ConsultaAnuncios();
             dtAnuncios.DataBind();
-            dlEventos.DataSource = logica.ConsultaEventos(DateTime.Today,0, 2,0);
+            dlEventos.DataSource = logica.ConsultaEventos(DateTime.Today,0, 5,0);
             dlEventos.DataBind();
         }
         public string validaImagen(object url)
@@ -88,15 +88,22 @@ namespace WebAppIntranetSkytex
             DateTime fecha_ini = Convert.ToDateTime(txtNuevaFechaInicio.Text);
             if (validarFechas(fecha_ini,fecha_fin))
             {
-                WebAppIntranetAdmEventos_Result resultado = logica.AdminAnuncios(1, titulo, texto, fecha, Session["user_cve"].ToString(), fecha_ini, fecha_fin, 1, 1);
-                if (resultado.error==0)
+                if (txtNuevoTitulo.Text.Trim(' ') != "" && txtNuevoTexto.Text.Trim(' ') != "")
                 {
-                    txtNuevoTitulo.Text = txtNuevoTexto.Text = txtNuevaFechaFin.Text = "";
-                    Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
+                    WebAppIntranetAdmEventos_Result resultado = logica.AdminAnuncios(1, titulo, texto, fecha, Session["user_cve"].ToString(), fecha_ini, fecha_fin, 1, 1);
+                    if (resultado.error == 0)
+                    {
+                        txtNuevoTitulo.Text = txtNuevoTexto.Text = txtNuevaFechaFin.Text = "";
+                        Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
+                    }
+                    else
+                    {
+                        Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
+                    }
                 }
                 else
                 {
-                    Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
+                    Response.Write("<script type=\"text/javascript\">alert('Completar todos los campos');</script>");
                 }
             }
             else
@@ -138,8 +145,8 @@ namespace WebAppIntranetSkytex
             if (eventos.Count == 1)
             {
                 lblTituloEvento.Text = eventos.FirstOrDefault().titulo;
-                lblFechaInicio.Text = eventos.FirstOrDefault().fecha_ini.Date.ToString();
-                lblFechaFin.Text = eventos.FirstOrDefault().fecha_fin.Date.ToString();
+                lblFechaInicio.Text = eventos.FirstOrDefault().fecha_ini.Date.ToString("dd/MMMM/yyyy");
+                lblFechaFin.Text = eventos.FirstOrDefault().fecha_fin.Date.ToString("dd/MMMM/yyyy");
                 lblTextoEvento.Text = eventos.FirstOrDefault().texto;
                 lblNumFolEvento.Text = eventos.FirstOrDefault().num_fol.ToString();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "MuestraEvento();", true);
@@ -155,8 +162,17 @@ namespace WebAppIntranetSkytex
             }
             else
             {
-                Calendario.SelectedDates.Remove(Calendario.SelectedDate);
-                Response.Write("<script type=\"text/javascript\">alert('No hay eventos')</script>");
+                if (Session["user_cve"]!=null)
+                {
+                    Calendario.SelectedDates.Remove(Calendario.SelectedDate);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "MuestraNuevoEvento();", true);
+                }
+                else
+                {
+                    Calendario.SelectedDates.Remove(Calendario.SelectedDate);
+                    Response.Write("<script type=\"text/javascript\">alert('No hay eventos para el dia seleccionado');window.location.href = 'Inicio.aspx';</script>");
+                }
+                
             }
         }
 
@@ -166,8 +182,8 @@ namespace WebAppIntranetSkytex
             string folio = lnk.Attributes["CustomParameter"].ToString();
             WebAppIntranetConsultaEventos_Result evento = logica.ConsultaEventos(DateTime.Today.Date, Convert.ToInt32(folio), 4, 0).FirstOrDefault();
             lblTituloEvento.Text = evento.titulo;
-            lblFechaInicio.Text = evento.fecha_ini.Date.ToString();
-            lblFechaFin.Text = evento.fecha_fin.Date.ToString();
+            lblFechaInicio.Text = evento.fecha_ini.Date.ToString("dd/MMMM/yyyy");
+            lblFechaFin.Text = evento.fecha_fin.Date.ToString("dd/MMMM/yyyy");
             lblTextoEvento.Text = evento.texto;
             lblNumFolEvento.Text = folio;
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "MuestraEvento();", true);
@@ -175,7 +191,7 @@ namespace WebAppIntranetSkytex
 
         protected void btnEditarEvento_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/Editar_Evento.aspx?fol=" + lblNumFolEvento.Text);
+            Response.Redirect("Editar_Evento.aspx?fol=" + lblNumFolEvento.Text);
         }
 
         protected void btnNuevoEvento_Click(object sender, EventArgs e)
@@ -186,17 +202,24 @@ namespace WebAppIntranetSkytex
                 string texto = txtNuevoTextoEvento.Text;
                 DateTime fecha_ini = Convert.ToDateTime(txtNuevaFechaIniEvento.Text);
                 DateTime fecha_fin = Convert.ToDateTime(txtNuevaFechaFinEvento.Text);
-                if (validarFechas(fecha_ini,fecha_fin))
+                if (validarFechas(fecha_ini, fecha_fin))
                 {
-                    WebAppIntranetAdmEventos_Result resultado = logica.AdminAnuncios(0, titulo, texto, DateTime.Today.Date, Session["user_cve"].ToString(), fecha_ini, fecha_fin, 0, 1);
-                    if (resultado.error == 0)
+                    if (txtNuevoTituloEvento.Text.Trim(' ') != "" && txtNuevoTextoEvento.Text.Trim(' ') != "")
                     {
-                        txtNuevoTituloEvento.Text = txtNuevoTextoEvento.Text = txtNuevaFechaFinEvento.Text = txtNuevaFechaIniEvento.Text = "";
-                        Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
+                        WebAppIntranetAdmEventos_Result resultado = logica.AdminAnuncios(0, titulo, texto, DateTime.Today.Date, Session["user_cve"].ToString(), fecha_ini, fecha_fin, 0, 1);
+                        if (resultado.error == 0)
+                        {
+                            txtNuevoTituloEvento.Text = txtNuevoTextoEvento.Text = txtNuevaFechaFinEvento.Text = txtNuevaFechaIniEvento.Text = "";
+                            Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
+                        }
+                        else
+                        {
+                            Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
+                        }
                     }
                     else
                     {
-                        Response.Write("<script type=\"text/javascript\">alert('" + resultado.mensaje + "');window.location.href = 'Inicio.aspx';</script>");
+                        Response.Write("<script type=\"text/javascript\">alert('Completar todos los campos');</script>");
                     }
                 }
                 else
@@ -229,6 +252,13 @@ namespace WebAppIntranetSkytex
                 valida = false;
             }
             return valida;
+        }
+
+        protected void Calendario_VisibleMonthChanged(object sender, MonthChangedEventArgs e)
+        {
+            dlEventos.DataSource = null;
+            dlEventos.DataSource = logica.ConsultaEventos(e.NewDate, 0, 5, 0);
+            dlEventos.DataBind();
         }
     }
 }

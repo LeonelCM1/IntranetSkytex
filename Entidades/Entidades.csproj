@@ -84,6 +84,9 @@
     <Compile Include="WebAppIntranetConsultaEventos_Result.cs">
       <DependentUpon>Skytex.tt</DependentUpon>
     </Compile>
+    <Compile Include="WebAppIntranetConsultaNoticias_Result.cs">
+      <DependentUpon>Skytex.tt</DependentUpon>
+    </Compile>
     <Compile Include="WebAppIntranetConsultaUsuarios_Result.cs">
       <DependentUpon>Skytex.tt</DependentUpon>
     </Compile>
